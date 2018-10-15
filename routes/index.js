@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const passport = require("passport");
+const {postRegister,
+       postLogin,
+       getLogout} = require('../controllers');
+const {asyncErrorHandler} = require('../middleware');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -12,24 +17,19 @@ router.get('/register', (req, res, next) => {
 });
 
 /* POST REGISTER . */
-router.post('/register', (req, res, next) => {
-  res.send("works");
-});
+router.post('/register', asyncErrorHandler(postRegister));
+
 
 /* GET login */
 router.get('/login', (req, res, next) => {
-  res.send("works");
+  res.send("login");
 });
 
 /* POST login */
-router.post('/login', (req, res, next) => {
-  res.send("works");
-});
+router.post('/login', postLogin);
 
 /* get logout */
-router.get('/logout', (req, res, next) => {
-  res.send("works");
-});
+router.get('/logout', getLogout);
 
 
 /* get PROFILE */
@@ -58,8 +58,13 @@ router.put('/forgot-pw', (req, res, next) => {
 
 
 /*  GET reset-pw */
-router.get('/reset-pw', (req, res, next) => {
-  res.send("GET /reset-pw/:token");
+router.get('/reset/:token', (req, res, next) => {
+  res.send("GET /reset/:token");
+});
+
+/*  PUT reset-pw */
+router.put('/reset/:token', (req, res, next) => {
+  res.send("GET /reset/:token");
 });
 
 

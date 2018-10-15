@@ -1,0 +1,15 @@
+
+
+<div><h1><%=shot.title%></h1></div>
+<div><%=shot.body%></div>
+<div>
+  <% shot.images.forEach(function(image) { %>
+    <img src="<%=image.url%>" alt="the image" width="200px">
+  <% }); %>
+</div>
+<div><a href="/shots/<%=shot._id%>/edit">Edit shot</a></div>
+<div>
+<form action="/shots/<%=shot.id%>?_method=DELETE" method="POST">
+<input type="submit" value="delete">
+</form>
+</div>

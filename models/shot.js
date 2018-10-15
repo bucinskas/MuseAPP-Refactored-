@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const shotSchema = new mongoose.Schema({
     title: String,
-    image: String,
+    images: [ {url: String, public_id: String} ],
     body: String,
     category: String,
     author: {
