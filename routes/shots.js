@@ -26,8 +26,8 @@ router.get('/:id', asyncErrorHandler(shotDisplay));
 /* GET FORM shots :id /shots/:id/edit */
 router.get('/:id/edit', asyncErrorHandler(shotEdit));
 
-/* update posts :id /posts/:id */
-router.put('/:id', asyncErrorHandler(shotUpdate));
+/* PUT posts :id /posts/:id */
+router.put('/:id', upload.array('images', 2), asyncErrorHandler(shotUpdate));
 
 /* delete posts :id /posts/:id */
 router.delete('/:id', asyncErrorHandler(shotDestroy));

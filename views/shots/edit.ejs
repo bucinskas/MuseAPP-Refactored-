@@ -1,5 +1,44 @@
-<form action="/shots/<%=shot._id%>?_method=PUT" method="POST">
-   <input type="text" name="shot[title]" value="<%=shot.title%>">
-   <input type="text" name="shot[body]" value="<%=shot.body%>">
+<form action="/shots/<%=shot._id%>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
+   <div><input type="text" name="shot[title]" value="<%=shot.title%>"></div>
+   <div><input type="text" name="shot[body]" value="<%=shot.body%>"></div>
+   <div>
+     <input type="file" id="imageUpload" accept="images/*" name="images" multiple/>
+     <% shot.images.forEach(function(image, i){ %>
+      <div>
+      <img src="<%=image.url%>" width="50px">
+      <label for="image<%=i%>">Delete?</label>
+      <input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%=i%>" value="<%=image.public_id%>">
+      </div>
+     <% }); %>
+   </div>
    <button class="submit-shot-button">Submit</button>
 </form>
+
+
+<script>
+
+let postEditForm = document.getElementById('postEditForm');
+
+postEditForm.addEventListener('submit', function(event){
+  
+  let imageUploads = document.getElementById('imageUpload').files.length;
+
+  let existingImgs = document.querySelectorAll('.imageDeleteCheckbox').length;
+
+  let imgDeletions = document.querySelectorAll('.imageDeleteCheckbox:checked').length;
+    
+  let newTotal = existingImgs - imgDeletions + imageUploads;  
+  if(newTotal > 2) {
+    event.preventDefault();
+    let removalAmt = newTotal - 2;
+    alert(`you need to remove at least ${removalAmt} more image${removalAmt === 1? '': 's'}! `);  
+  }
+
+});
+
+
+
+
+
+
+</script>
