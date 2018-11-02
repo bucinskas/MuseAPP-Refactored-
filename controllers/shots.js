@@ -1,4 +1,5 @@
 const Shot = require("../models/shot");
+const User = require("../models/user");
 const cloudinary = require("cloudinary");
 cloudinary.config({
   cloud_name: 'dnau0mzjg',
@@ -8,28 +9,47 @@ cloudinary.config({
 
 module.exports = {
   async getShots(req, res, next) {
-      let shots = await Shot.find({}); 
+      let shots = await Shot.find({}).
+      populate("author").exec(); 
+
       res.render("shots/index", { shots });
   },
   shotNew(req, res, next) {
       res.render("shots/new");
   },
   async shotCreate(req, res, next) {
-    req.body.shot.images = []; 
-    for(const file of req.files) {
-      let image = await cloudinary.v2.uploader.upload(file.path);
-      req.body.shot.images.push({
-        url: image.secure_url,
-        public_id: image.public_id
-      });
-    }
+    //req.body.shot.images = []; 
+    // for(const file of req.files) {
+    let image = await cloudinary.v2.uploader.upload(req.file.path);    
+    req.body.shot.image = image.secure_url; 
+    //   req.body.shot.images.push({
+    //     url: image.secure_url,
+    //     public_id: image.public_id
+    //   });
+    // }
+    console.log(req.file)
     let shot = await Shot.create(req.body.shot);
+    shot.author = req.user._id; 
+    shot.save();
+    //req.session.success = 'Shot created successfully';
     res.redirect(`/shots/${shot.id}`);
+    
   },
+  
   async shotDisplay(req, res, next) {
-    let shot = await Shot.findById(req.params.id);
-    res.render("shots/show", { shot });
+    let shot = await Shot.findById(req.params.id).populate({
+     path: 'comments',
+     options: { sort: { "_id": -1 }},
+     populate: { 
+       path: 'author',
+       model: 'User'
+      }
+    }).populate("author").exec();
+    // display all shots by the user on side div 
+    let shots = await Shot.find({}).where('author').equals(shot.author.id).exec();
+    res.render("shots/show", { shot, shots });
   },
+
   async shotEdit(req, res, next) {
     let shot = await Shot.findById(req.params.id);
     res.render("shots/edit", { shot });  
@@ -86,4 +106,5 @@ module.exports = {
     res.redirect("/shots");
   }
 
-}
+};
+

@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="main-register">
+
+
+
+
+<div class="regFormMain">
+<h1>Sign up</h1>
+<form class="regForm" action="/register" method="POST" enctype="multipart/form-data">
+
+
+
+
+ <div class="field">
+<input type="text" name="firstName" placeholder="Your Name">
+  </div>
+
+
+  <div class="field">
+    <input type="text" name="username" placeholder="Choose a username">
+  </div>
+
+
+  <div class="field">
+    <input type="email" name="email" placeholder="Email">
+  </div>
+
+  <div class="field">
+    <input type="password" name="password" placeholder="Password">
+    <p class="passwordMessage">Minimum 6 characters</p>
+  </div>
+
+  <button class="signup-button" type="submit">Create account</button>
+  <p class="alreadyMember">Already a member? <a href="/login">Sign in</a></p>
+</form>
+</div>
+
+
+</div>

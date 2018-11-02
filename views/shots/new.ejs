@@ -1,8 +1,24 @@
-<form action="/shots" method="POST" enctype="multipart/form-data">
-   <input type="text" name="shot[title]" placeholder="title">
-   <input type="text" name="shot[body]" placeholder="description">
-   <div>
-     <input type="file" accept="images/*" name="images" multiple/>
+<% layout('layouts/boilerplate') -%>
+
+<div class="add-new-shot">
+<p class="add-new-shot-header">Add new shot</p>
+<form class="newShot" action="/shots" method="POST" enctype="multipart/form-data">
+  <div class="field">
+    <input type="text" name="shot[title]" placeholder="title">
+  </div>
+
+  <div>
+     <input type="file" accept="image/*" name="image" required/>
    </div>
-   <button class="submit-shot-button">Submit</button>
+
+  <div class="field">
+    <input type="text" name="shot[body]" placeholder="description">
+  </div>
+  <div class="field">
+    <input type="text" name="shot[category]" placeholder="category">
+  </div>
+  <button class="submit-shot-button">Submit</button>
 </form>
+</div>
+
+

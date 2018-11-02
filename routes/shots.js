@@ -2,34 +2,45 @@ const express = require('express');
 const router = express.Router();
 const multer = require("multer");
 const upload = multer({'dest': 'uploads/'});
-const {asyncErrorHandler} = require("../middleware");
+const {asyncErrorHandler,
+      isLoggedIn,
+      isShotAuthor} = require("../middleware");
+
 const {getShots,
       shotNew,
       shotCreate,
       shotDisplay,
       shotEdit,
       shotUpdate,
-      shotDestroy} = require("../controllers/shots");
+      shotDestroy
+    } = require("../controllers/shots");
 
-/* GET posts index /posts. */
+
+const shotLike = require("./like");
+
+/* GET shots index /shots. */
 router.get('/', asyncErrorHandler(getShots));
 
-/* GET posts new /shots/new */
-router.get('/new', shotNew);
+/* GET shots new /shots/new */
+router.get('/new', isLoggedIn, shotNew);
 
-/* POST posts CREATE /posts */
-router.post('/', upload.array('images', 2), asyncErrorHandler(shotCreate));
+/* POST shots CREATE /posts */
+router.post('/', isLoggedIn, upload.single('image'), asyncErrorHandler(shotCreate));
 
-/* GET posts :id /posts/:id */
+/* GET shots :id /shots/:id */
 router.get('/:id', asyncErrorHandler(shotDisplay));
 
 /* GET FORM shots :id /shots/:id/edit */
-router.get('/:id/edit', asyncErrorHandler(shotEdit));
+router.get('/:id/edit', isShotAuthor, asyncErrorHandler(shotEdit));
 
-/* PUT posts :id /posts/:id */
-router.put('/:id', upload.array('images', 2), asyncErrorHandler(shotUpdate));
+/* PUT shots :id /shots/:id */
+router.put('/:id', isShotAuthor, upload.array('images', 2), asyncErrorHandler(shotUpdate));
 
-/* delete posts :id /posts/:id */
-router.delete('/:id', asyncErrorHandler(shotDestroy));
+/* delete shots :id /posts/:id */
+router.delete('/:id', isShotAuthor, asyncErrorHandler(shotDestroy));
+
+// shot like 
+
+router.get('/:shotId/:id/like', shotLike); 
 
 module.exports = router;

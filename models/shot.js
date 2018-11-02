@@ -1,17 +1,14 @@
 const mongoose = require("mongoose");
+const Comment = require("./comment");
 
 const shotSchema = new mongoose.Schema({
     title: String,
-    images: [ {url: String, public_id: String} ],
+    image: String,
     body: String,
     category: String,
-    author: {
-      id: {
+    author: {  
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-      },
-      username: String,
-      avatar: String
     },
     createdAt: {type: Date, default: Date.now},
     comments: [
@@ -25,8 +22,16 @@ const shotSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
       }
-    ],
-    counter: {type: Number, default: 0}
+    ]
+  });
+
+// remove comments associated to a shot 
+  shotSchema.pre('remove', async function () {
+    await Comment.remove({
+      _id: {
+        $in: this.comments  
+      }
+    });
   });
   
 module.exports = mongoose.model("Shot", shotSchema);

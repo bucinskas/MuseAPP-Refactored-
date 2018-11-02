@@ -2,14 +2,17 @@ require('dotenv').config();
 
 const createError = require('http-errors');
 const express = require('express');
+const engine = require('ejs-mate');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); 
 const logger = require('morgan');
 const session = require("express-session");
 const mongoose = require('mongoose');
 const methodOverride = require("method-override");
+
+
 
 // required with passport js 
 const User = require('./models/user');
@@ -31,6 +34,8 @@ db.once('open', function() {
   console.log('we are connected');
 });
 
+// use ejs-locals for all ejs templates: 
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -49,6 +54,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.locals.moment = require('moment');
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -58,6 +65,24 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// set local variables middleware 
+app.use(function(req, res, next){
+  //req.user = {
+    //"_id" : "5bcd9b04112c991b2c908f13",
+    //"username" : "martynas"
+  //}
+  res.locals.currentUser = req.user; 
+  // set default page title 
+  res.locals.title = "Mute APP";
+  // set success flash message 
+  res.locals.success = req.session.success || ''; 
+  delete req.session.success; 
+  // set error flash message 
+  res.locals.error = req.session.error || ''; 
+  delete req.session.error; 
+  // continue on to next function in middleware chain 
+  next(); 
+}); 
 
 // mount routes 
 app.use('/', indexRouter);
@@ -72,12 +97,16 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  //res.locals.message = err.message;
+  //res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  //res.status(err.status || 500);
+  //res.render('error'); 
+  console.log(err);
+  req.session.error = err.message;
+  res.redirect('back');
 });
+
 
 module.exports = app;

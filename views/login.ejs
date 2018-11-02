@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="main-container">
+
+
+<div class="loginMain">
+<h2>Hi there</h2>
+<div class="sign-connections">
+<a class="auth-twitter" href="">Twitter</a>
+
+<a class="auth-facebook" href="">Facebook</a>
+<a class="auth-google" href="">Google</a>
+</div>
+
+<div class="form-class">
+<form class="loginForm" action="/login" method="POST">
+
+    <div class="field">
+      <input type="text" name="username" placeholder="Username">
+    </div>
+
+     <div class="field">
+      <input type="password" name="password" placeholder="Password">
+   
+    </div>
+
+    <button class="signin-button">Sign in</button>
+</form>
+<a href="/forgot">Forgot password</a>
+<p class="signup-notmember"> Not a member? <a href="/register">Sign up now</a></p>
+</div>
+
+
+</div>
+
+
+</div>

@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') -%>
+
+
+
+<div class="wrapper">
+  
+   <aside class="sidebar">
+      <div class="profile-info">
+      <img src="<%= user.avatar %>" class="profile-image" alt="user profile image">
+      <h1><%=user.username%></h1>
+      <p>Dublin, Ireland</p>
+      <p>Illustrator & Logo designer. I work using digital tools, specially vector. Contact me: yogaperdana7@gmail.com</p>
+      <p class="authorName"><%=user.firstName%> <%=user.lastName%></p>
+      <p><%=user.email%></p>
+      </div>
+      <div class="profile-stats">
+      <p>Projects: 100</p>
+      <p><i class="fas fa-heart"></i>Likes: 150</p>
+      <p>Followers: 99</p>
+      <p>Following: 89</p>
+      </div>
+    
+   </aside>
+    
+  <article class="content">
+    <% shots.forEach(function(shot){ %>
+     <div class="panel">
+    <a href="/shots/<%=shot.id%>"><img src="<%=shot.image%>" alt="the image" width="200px"></a>
+
+     <p class="title"><a href="/shots/<%=shot.id%>"></img><%=shot.title.substring(0,25)%></a>..</p>
+      <p><a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a></p>
+      <p><%=shot.category%></p>
+    </div>
+      <% }); %>
+    
+  </article>
+    
+</div>
+
+
+
+    
+   
+   
+    
+
+
+

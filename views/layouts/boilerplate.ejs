@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/app.css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+     <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  </head>
+  <body>
+  <body>
+  <div class="header-banner">
+      <header>
+        <nav>
+        <div class="logo">
+        <a href="/"><img class="logo-svg" src="/images/mightylogo.svg"></a>
+        </div>
+          <ul>
+            <li class="active"><a href="/">Shots</a></li>
+            <li><a href="/artists">Artists</a></li>
+            <li><a href="/shots/new">Share now</a></li>
+          </ul>
+        </nav>
+        <div class="user-tools">
+          <ul>
+            <% if (!currentUser){ %>
+            <ul>
+            <li><a href="/register">Sign up</a></li>
+            <li><a href="/login">Sign in</a></li>
+           <% } else { %>
+            <li><a href="/profile">Signed in as <%=currentUser.username%></a></li>
+            <li><a href="/logout">Logout</a></li>
+            
+           <% } %>
+        
+          <li>
+          <form action="/shots" method="GET" >
+            <input type="text" name="search" class="searchBox" placeholder="Search">
+          </form>
+          </li>
+          </ul>
+        </div>
+      </header>
+        <% include ../partials/flash-messages %>
+    </div>
+
+
+
+
+  <%- body -%>
+ 
+  </body>
+</html>

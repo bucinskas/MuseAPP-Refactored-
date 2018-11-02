@@ -1,0 +1,275 @@
+
+// login and register 
+
+.main-register 
+  height: 100vh
+  background-color: #f4f4f4
+  h1 
+    margin: 0
+    color: white 
+    text-align: center 
+    font-size: 35px
+  .regFormMain
+    max-width: 450px
+    margin: 0 auto
+    //background-image: url("https://images.unsplash.com/photo-1527769929977-c341ee9f2033?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=99dc2a1e9649dea0da765888eb03a5c6&auto=format&fit=crop&w=2468&q=80")
+    background-size: cover 
+    border-radius: 15px
+    padding: 20px
+    .regForm 
+      p 
+        color: white 
+      input 
+        margin: 5px 0 5px 0
+        height: 45px
+        width: 100% 
+        padding: 20px 13px 20px 13px
+        border-radius: 10px
+        border: none
+        outline: none 
+      .signup-button
+        background: #363636 
+        padding: 10px 13px 10px 13px
+        border: none 
+        border-radius: 5px
+        width: 35%
+        margin-top: 10px 
+        font-weight: bold 
+        color: #fff 
+        &:hover 
+          background: black 
+      .alreadyMember  
+        margin-top: 5px
+        font-weight: bold
+        color: black  
+        a 
+          color: white 
+
+
+.main-container 
+  height: 100vh
+  background-color: #f4f4f4
+  .loginMain
+    max-width: 400px
+    margin: 0 auto 
+    h2
+      margin: 0 auto 
+      color: #999
+      font-size: 35px
+ 
+    .sign-connections 
+      border: 2px solid grey
+        radius: 6px
+      padding: 20px 20px   
+    .form-class
+      .signup-notmember
+        margin-top: 10px
+        text-align: center
+        color: black 
+        font-weight: bold 
+        a 
+          color: #999
+      .loginForm
+        border-radius: 15px 
+        margin-top: 10px
+        .field 
+          margin-bottom: 7px
+        .signin-button 
+          width: 100%
+          padding: 10px 13px 10px 13px
+          outline: none 
+          border: none 
+          background: black 
+          border-radius: 10px
+          color: #fff 
+          font-weight: bold
+          cursor: pointer
+        input[type="text"],
+        input[type="password"]
+          margin: 5px 0 5px 0
+          height: 30px
+          border: none 
+          border-radius: 10px
+          outline: none 
+          padding: 20px 13px 20px 13px
+          width: 100%
+
+
+
+// add new shot 
+
+  
+.add-new-shot
+  max-width: 400px
+  margin: 0 auto 
+  .add-new-shot-header 
+    text-align: center 
+    font-weight: bold 
+    font-size: 35px
+  .newShot 
+    input 
+      width: 100%
+      height: 30px
+      padding: 20px 13px 20px 13px
+      border-radius: 10px
+      border: none 
+      margin: 5px 0 5px 0
+    .submit-shot-button
+      margin-top: 10px
+      width: 30%
+      background: #ea4c88
+      color: #fff 
+      border: none 
+      border-radius: 10px
+      padding: 10px 13px 10px 13px
+
+
+    
+  
+
+    
+    
+
+/// INTRO SECTION 
+
+
+.intro
+  display: flex 
+  justify-content: center
+  flex-direction: column
+  background-image: url("/images/bgbgbg.png")
+  background-size: cover 
+  text-align: center
+  height: 200px 
+  padding: 10px
+
+  h1
+    margin: 0
+    font-size: 2.5em
+    color: #fff  
+
+  .continue 
+    border: none 
+    font-family: 'Montserrat', sans-serif
+    font-size: 18px
+    font-weight: bold 
+    background-color: #fff 
+    padding: 14px 26px
+    text-decoration: none  
+    text-transform: uppercase 
+    border-radius: 10px  
+    outline: none 
+    
+
+
+
+// SECTION NAV
+
+.section-nav
+  display: flex 
+  max-width: 970px
+  margin: 0 auto 
+  padding: 10px 0
+  border-bottom: 1px solid #ccc
+  
+  a
+    font-weight: bold
+    
+    color: rgba(0,0,0,0.5)
+    margin: 0 20px 0 0
+    
+    &.active, &:hover
+      color: rgba(0,0,0,1)    
+
+
+// SHOTS 
+
+
+
+.shots 
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(202px, 1fr))
+  grid-template-rows: minmax(158px, auto)
+  justify-items: center 
+  max-width: 970px
+  margin: 0 auto 
+  padding: 10px 0
+  .shot 
+    background: #fff
+    border-radius: 5px
+    box-shadow: 0.2px 0.2px 0.2px 0.2px rgba(25,25,25,0.2)
+    padding: 10px 10px 6px 10px
+    margin: 10px 0 10px 0
+    .meta
+      justify-content: flex-end
+      .title 
+        font-weight: bold 
+      .author
+        margin: 18px 0 10px 0 
+      .category 
+        font-size: 12px  
+      .shotStatsCount
+        border-top: 1.2px #f2f2f2 solid
+        margin-top: 2px
+        padding-top: 2px
+        a 
+          color: black 
+        .shotLikesCount
+          margin-right: 10px
+      i 
+        font-size: 15px
+        margin-right: 7px   
+        color: grey
+    
+  img 
+    width: 202px
+    height: 158px 
+
+  
+
+
+// NO SEARCH MATCH 
+
+.noMatch 
+  grid-column: 1 / -1
+  height: 80px
+  margin: 10px auto 
+  border: 1px solid #cccccc
+  padding: 20px
+  box-shadow: 0.2px 0.2px 0.2px 0.2px rgba(25,25,25,0.2)
+  background: #fff
+  h3 
+    font-size: 1.7em 
+    margin: 0     
+
+
+  
+// FOOTER 
+
+
+.footer 
+  background: #fff 
+  .footer-content1
+    max-width: 1100px
+    margin: 0 auto   
+    p 
+      margin: 0   
+
+
+
+
+.errorMessage
+  color: #fff 
+  padding: 15px
+  font-size: 18px
+  background-color: #f55
+  margin: 0 auto 
+  text-align: center 
+
+
+  
+  
+                
+      
+
+

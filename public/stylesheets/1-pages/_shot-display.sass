@@ -1,0 +1,150 @@
+
+/// shot display 
+
+
+
+.showDiv 
+  display: grid
+  max-width: 720px
+  //background: #fff
+  //border-radius: 10px
+  //box-shadow: 0.2px 0.2px 0.2px 0.2px rgba(25,25,25,0.2)
+  grid-template-columns: repeat(2, 1fr)
+  grid-column-gap: 20px
+  grid-template-rows: 80px auto auto auto 
+  margin: 20px auto 
+  .shot-body 
+    grid-column: 1 / 2 
+    grid-row: 2 / 3
+    img 
+      width: 400px 
+      height: 330px
+      box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(25,25,25,0.2)
+  .shot-description 
+    grid-column: 1 / 2   
+    grid-row: 3 / 4 
+    margin-top: 15px 
+    p 
+      font-size: 16px
+      color: black 
+    .shot-buttons
+      display: flex 
+      margin-top: 15px
+      margin-bottom: 15px
+      #btn
+        padding: 5px 10px
+        margin-right: 10px
+        text-decoration: none
+        border-radius: 3px
+        border: none 
+        background-color: black
+        color: #fff 
+        font-family: 'Lato'
+        cursor: pointer
+        a 
+          color: #fff 
+          text-decoration: none   
+  .shot-header
+    grid-column: 1 / -1
+    .shot-header-avatar 
+      width: 50px
+      height: 50px
+      border-radius: 50%
+      float: left 
+      margin-right: 10px
+      margin-top: 4px
+    .shot-title 
+      font-size: 10px
+      h1 
+        margin: 0
+    .shot-details
+      margin: 0 0 20px 0
+      a 
+        font-weight: bold    
+
+  .contents
+    display: grid 
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)) // minimum 115px maximum 1fr 
+    grid-auto-rows: minmax(86px, auto) 
+    justify-items: center
+    grid-column: 2 / 3 
+    grid-row: 2 /  3 
+    margin-top: 140px
+    img
+      width: 115px
+      height: 86px
+      box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(25,25,25,0.2)
+  
+  .shot-stats
+    line-height: 3
+    margin: 0 0 20px 0
+    color: #999
+    grid-column: 2 / 3 
+    grid-row: 2 / 3 
+    span 
+      float: right 
+    .shot-likes
+      border-bottom: 1px solid #ccc 
+    .shot-views 
+      border-bottom: 1px solid #ccc 
+    .shot-share 
+      border-bottom: 1px solid #ccc     
+
+// comments section 
+
+
+
+.comments-section 
+  border-top: 1px solid #ccc
+  grid-column: 1 / 2 
+  grid-row: 4 / 5 
+  .content 
+    margin: 20px 0 20px 0
+    border-bottom: 1px solid #ccc 
+  .profile-comment-image 
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    float: left 
+    margin: 3px 10px 0 0 
+  .comment-author 
+    font-size: 20px
+    font-weight: 600
+  .comment-body 
+    font-size: 15px  
+    margin-left: 50px
+  #comments-header 
+    font-size: 19px  
+  .comment-meta 
+    margin: 10px 0 0 50px  
+  textarea 
+    width: 400px
+    height: 100px
+    padding: 10px
+    resize: none
+    outline: none
+    border-radius: 3px
+    border: none
+    font-size: 1,5em
+  .pull-right 
+    display: flex
+    margin: 0 0 20px 50px
+    #btn   
+      padding: 2px 5px
+      margin-right: 10px
+      text-decoration: none
+      border-radius: 3px
+      border: none 
+      background-color: black
+      color: #fff 
+      font-family: 'Lato'
+      cursor: pointer
+      a 
+        color: #fff 
+        text-decoration: none 
+
+
+
+
+.edit-comment-form 
+  display: none      

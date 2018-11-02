@@ -1,8 +1,46 @@
-<h1>all shots</h1>
+<% layout('layouts/boilerplate') -%>
 
 
-<% shots.forEach(function(shot){ %>
-<div>
-<a href="/shots/<%=shot.id%>"><%=shot.title%></a>
-</div>
-<% } )%>
+
+<section class="intro">
+<div class="innerIntro">
+ <h1>What's your MUSE today?</h1>
+ <a href="/shots/new"><button class="continue">Share now</button></a>
+ </div>
+</section>
+
+
+
+
+<nav class="section-nav">
+<a href="/shots">Shots</a>
+<a href="/shots?sort=recent">Recent</a> 
+<a href="/shots?sort=popular">Popular</a>
+<a href="/shots?sort=suggestions">Suggestions</a>
+</nav>
+
+
+<section class="shots">
+
+  <% shots.forEach(function(shot){ %>
+    <div class="shot"><a href="/shots/<%=shot.id%>">
+    <img src="<%=shot.image%>" alt="the image" width="200px"></a>
+        <div class="meta">
+        <div class="title"><a href="/shots/<%=shot.id%>"><p><%= shot.title.substring(0, 25)%></p></a></div>
+        <div class="author"><a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a></div>
+        <div class="category"> <a href="/shots/<%=shot.id%>">
+        <%=shot.category%>
+        </a>
+        </div>
+
+        <div class="shotStatsCount">
+        
+        <span class="shotLikesCount"><i class="fas fa-heart"></i><a href="/shots/<%=shot.id%>"><%=shot.likes.length%></a></span>
+        <span class="shotCommentsCount"><i class="fas fa-comment"></i><a href="/shots/<%=shot.id%>"><%=shot.comments.length%></a></span>
+    
+        </div>
+
+        </div>
+      </div>
+ <% }) %>
+ </section>

@@ -1,15 +1,161 @@
+<% layout('layouts/boilerplate') -%>
 
 
-<div><h1><%=shot.title%></h1></div>
-<div><%=shot.body%></div>
-<div>
-  <% shot.images.forEach(function(image) { %>
-    <img src="<%=image.url%>" alt="the image" width="200px">
-  <% }); %>
+
+
+
+<div class="showDiv">
+ 
+    <div class="shot-header">
+    <img class="shot-header-avatar" src="<%= shot.author.avatar %>" class="profile-image" alt="user profile image">
+    <div class="shot-title"><h1><%= shot.title %></h1></div>
+    <p class="shot-details">by <a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a> <span><%= moment(shot.createdAt).fromNow() %></span> in  <a href="/shots?search="><span><%=shot.category%></span></a></p>
+    </div>
+
+  
+    <div class="shot-body">
+  
+    <img src="<%=shot.image%>" alt="the image" width="200px">
+ 
+    </div>
+
+
+      <div class="shot-description">
+        <p><%= shot.body %></p>
+        <div class="shot-buttons">
+       <% if(shot.author.equals(currentUser)) { %>
+    
+       <button class="edit-comment-button" id="btn"><a class="" href="/shots/<%=shot._id%>/edit">Edit shot</a></button>
+       <form id="delete" action="/shots/<%=shot._id%>?_method=DELETE" method="POST">
+       <button class="delete-comment-button" id="btn">Delete shot</button>
+       </form>
+       
+      
+       <% } %>
+       </div>
+      </div>
+       
+      
+
+
+
+
+<div class="comments-section">
+  <h3 id="comments-header"><span id="comments-counter"> <%=shot.comments.length%> </span> Comments</h3>
+
+   
+      <form id="new-comment-form" action="/shots/<%=shot._id%>/comments" method="POST">
+        <div class="field">
+          <textarea type="text" name="comment[body]" placeholder="Your comment"></textarea>
+        </div>
+          <button id="btn">Submit comment</button>
+      </form>
+
+
+      <div class="comments-group" id="comments-list">
+        <% shot.comments.forEach(function(comment){ %>
+        <div class="content">
+               <form class="edit-comment-form" action="/shots/<%=shot._id%>/comments/<%=comment._id%>" method="POST">
+                 <div class="field">
+                   <label>comment</label>
+                   <input type="text" name="comment[text]" value="<%=comment.text%>">
+                 </div>
+                <button class="ui secondary button">Update comment</button>
+               </form>
+      <a href="/users/<%=shot.author.id%>"><img src="<%= comment.author.avatar %>" class="profile-comment-image" alt="user profile image"></a>
+      <a href="/users/<%=comment.author.id%>" class="comment-author"><%=comment.author.username%></a>
+                   <div class="comment-body">
+                   <p><%=comment.body%></p>
+                   </div>
+                   <div class="comment-meta">
+                   <span><%= moment(comment.createdAt).fromNow() %></span>
+                  </div>
+                   <% if(comment.author.equals(currentUser)) { %>
+                  <div class="pull-right">
+                  <button class="edit-button" id="btn">Edit</button>
+                   <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+                 <button class="delete-comment-button" id="btn">Delete</button>
+                 </form>
+                  </div>   
+                 <% } %>
+                  </div>
+      <% }) %>
+  </div>
+
+    
+
+
+    
+
+
+
+
 </div>
-<div><a href="/shots/<%=shot._id%>/edit">Edit shot</a></div>
-<div>
-<form action="/shots/<%=shot.id%>?_method=DELETE" method="POST">
-<input type="submit" value="delete">
-</form>
+      <div class="shot-stats">
+
+
+
+
+
+        <div class="shot-likes">
+        
+        <span id="likes-main">
+        <p><i class="fas fa-heart"></i>
+        Likes 
+        <span id="loves-count"><%=shot.likes.length%></span></p>
+        </span>
+      
+        </div>
+          
+        <div class="shot-views"><p><i class="far fa-eye"></i>Views <span class="view-count"></span></p></div>
+        <div class="shot-share"><p><i class="fas fa-share"></i>
+         Share <span class="share-icons">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fas fa-envelope"></i>
+
+        </span></p></div>
+      </div>
+      <div class="contents">
+     <% for (var i = 0; i < shots.length; i++) { %>
+    <div class="nested">
+    <a href="/shots/<%= shots[i].id %>"><img src="<%= shots[i].image %>"></img></a>
+    </div>
+    <% }; %>
+    </div>
+    
 </div>
+
+
+<script src="/javascripts/javascripts.js"></script>
+
+
+
+<script>
+<% if(currentUser) { %>
+    $('#likes-main').on('click', function() {
+        var ajaxRequestLove = $.get("<%= shot._id %>/<%= currentUser._id %>/like");                       
+        /* Process returned result */
+        ajaxRequestLove.done(function( data ) {
+            if(data) {
+                //add one to love, change color
+                $('#loves-count').text((parseInt($('#loves-count').text()) + 1));
+                $('#loves-count').removeClass("text-white")
+                $('#loves-count').addClass("text-dark")
+            } else {
+                //remove one from love, change color
+                $('#loves-count').text((parseInt($('#loves-count').text()) - 1));
+                $('#loves-count').removeClass("text-dark")
+                $('#loves-count').addClass("text-white")
+            }
+        });
+    });
+<% } else { %>
+    $('#likes-main').on('click', function(){
+        window.location.href = "/register?return_url=" + window.location.pathname;
+    });
+<% } %>
+
+
+
+</script>
