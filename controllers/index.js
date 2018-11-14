@@ -44,7 +44,7 @@ module.exports = {
     res.render("artists", {users});
   },
   async getArtist(req, res, next) {
-    let user = await User.findById(req.params.id);
+    let user = await User.findById(req.params.username);
     let shots = await Shot.find().where('author').equals(user._id).populate("author").exec(); 
     res.render("users/show", {user, shots});
   },

@@ -43,14 +43,14 @@
 <div class="comments-section">
   <h3 id="comments-header"><span id="comments-counter"> <%=shot.comments.length%> </span> Comments</h3>
 
-   
-      <form id="new-comment-form" action="/shots/<%=shot._id%>/comments" method="POST">
+   <% if (currentUser) { %>
+      <form action="/shots/<%=shot._id%>/comments" id="comment-form" method="POST">
         <div class="field">
-          <textarea type="text" name="comment[body]" placeholder="Your comment"></textarea>
+          <textarea type="text" name="comment[body]" id="comment-body" placeholder="Your comment"></textarea>
         </div>
           <button id="btn">Submit comment</button>
       </form>
-
+   <% } %>
 
       <div class="comments-group" id="comments-list">
         <% shot.comments.forEach(function(comment){ %>
@@ -70,7 +70,7 @@
                    <div class="comment-meta">
                    <span><%= moment(comment.createdAt).fromNow() %></span>
                   </div>
-                   <% if(comment.author.equals(currentUser)) { %>
+                   <% if(currentUser && comment.author.equals(currentUser.id)) { %>
                   <div class="pull-right">
                   <button class="edit-button" id="btn">Edit</button>
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
@@ -114,7 +114,7 @@
         <i class="fab fa-twitter"></i>
         <i class="fas fa-envelope"></i>
 
-        </span></p></div>
+     </div>
       </div>
       <div class="contents">
      <% for (var i = 0; i < shots.length; i++) { %>

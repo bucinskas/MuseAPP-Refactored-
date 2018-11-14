@@ -41,7 +41,7 @@ router.get('/artists', displayAllArtists);
 
 // get USER PROFILES DISPLAY
 
-router.get('/users/:id', getArtist); 
+router.get('/users/:username', getArtist); 
 
 /* get PROFILE */
 // prepopulated form 
