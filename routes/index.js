@@ -1,5 +1,5 @@
-// const User = require("../models/user");
-// const Shot = require("../models/shot");
+const User = require("../models/user");
+const Shot = require("../models/shot");
 const express = require('express');
 const router = express.Router();
 const multer = require("multer");
@@ -8,18 +8,21 @@ const passport = require("passport");
 const {postRegister,
        postLogin,
        getLogout,
-       displayAllArtists,
        getRegister,
        getLogin,
-       getArtist,
-       updateUser
+       displayAllArtists
       } = require('../controllers');
-const {asyncErrorHandler} = require('../middleware');
+const {asyncErrorHandler,
+       userProfileOwnership} = require('../middleware');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.redirect("/shots");
 });
+
+
+
+router.get("/artists", displayAllArtists);
 
 /* GET register. */
 router.get('/register', getRegister);
@@ -36,21 +39,6 @@ router.post('/login', postLogin);
 /* get logout */
 router.get('/logout', getLogout);
 
-// get ALL ARTISTS DISPPLAY 
-router.get('/artists', displayAllArtists);
-
-// get USER PROFILES DISPLAY
-
-router.get('/users/:username', getArtist); 
-
-/* get PROFILE */
-// prepopulated form 
-router.get('/profile', (req, res, next) => {
-  res.send("works");
-});
-
-/* PUT PROFILE/:user_id */
-router.put('/profile/:user_id', updateUser);
 
 
 /*  GET forgot-pw */

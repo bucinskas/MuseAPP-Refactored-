@@ -32,14 +32,13 @@
            <% } else { %>
 
            <div class="user-info">
-         <li> <a href="/users/<%= currentUser.id %>"><img height="30" width="30" border-radius="50%" src="<%=currentUser.avatar%>">
+           <li><img height="30" width="30" border-radius="50%" src="<%=currentUser.avatar%>"></li>
+         <li> <a href="/users/<%= currentUser.id %>">
             <%=currentUser.username%></a></li>
+              </div>
             <li><a href="/logout">Logout</a></li>
-            </div>
+          
            <% } %>
-        
-
-
           <li>
           <form action="/shots" method="GET" >
             <input type="text" name="search" class="searchBox" placeholder="Search">
@@ -56,6 +55,8 @@
 
 
   <%- body -%>
- 
+  
+  <script src="/javascripts/shot-show.js"></script>
+  <script src="/javascripts/ajax.js"></script>
   </body>
 </html>

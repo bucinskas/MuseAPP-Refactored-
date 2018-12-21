@@ -34,7 +34,7 @@ router.get('/:id', asyncErrorHandler(shotDisplay));
 router.get('/:id/edit', isShotAuthor, asyncErrorHandler(shotEdit));
 
 /* PUT shots :id /shots/:id */
-router.put('/:id', isShotAuthor, upload.array('images', 2), asyncErrorHandler(shotUpdate));
+router.put('/:id', isShotAuthor, upload.single('image'), asyncErrorHandler(shotUpdate));
 
 /* delete shots :id /posts/:id */
 router.delete('/:id', isShotAuthor, asyncErrorHandler(shotDestroy));

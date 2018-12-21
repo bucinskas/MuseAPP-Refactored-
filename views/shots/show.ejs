@@ -52,27 +52,24 @@
       </form>
    <% } %>
 
-      <div class="comments-group" id="comments-list">
+    <div class="comments-group" id="comments-list">
         <% shot.comments.forEach(function(comment){ %>
-        <div class="content">
-               <form class="edit-comment-form" action="/shots/<%=shot._id%>/comments/<%=comment._id%>" method="POST">
-                 <div class="field">
-                   <label>comment</label>
-                   <input type="text" name="comment[text]" value="<%=comment.text%>">
-                 </div>
-                <button class="ui secondary button">Update comment</button>
-               </form>
-      <a href="/users/<%=shot.author.id%>"><img src="<%= comment.author.avatar %>" class="profile-comment-image" alt="user profile image"></a>
-      <a href="/users/<%=comment.author.id%>" class="comment-author"><%=comment.author.username%></a>
-                   <div class="comment-body">
+          <div class="content">
+            <a href="/users/<%=shot.author.id%>"><img src="<%= comment.author.avatar %>" class="profile-comment-image" alt="user profile image"></a>
+            <a href="/users/<%=comment.author.id%>" class="comment-author"><%=comment.author.username%></a>
+             <div class="comment-body">
                    <p><%=comment.body%></p>
                    </div>
                    <div class="comment-meta">
                    <span><%= moment(comment.createdAt).fromNow() %></span>
                   </div>
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
-                  <div class="pull-right">
-                  <button class="edit-button" id="btn">Edit</button>
+                  <div>
+                  <button class="toggleEditForm">Edit</button>
+                  <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
+                   <textarea name="comment[body]"><%=comment.body%></textarea>
+                  <input type="submit" value="Update">
+                </form>
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
                  <button class="delete-comment-button" id="btn">Delete</button>
                  </form>
@@ -98,23 +95,23 @@
 
 
         <div class="shot-likes">
-        
         <span id="likes-main">
         <p><i class="fas fa-heart"></i>
         Likes 
-        <span id="loves-count"><%=shot.likes.length%></span></p>
+        <span id="loves-count" style="float:right"><%=shot.likes.length%></span></p>
         </span>
       
         </div>
           
-        <div class="shot-views"><p><i class="far fa-eye"></i>Views <span class="view-count"></span></p></div>
+    
         <div class="shot-share"><p><i class="fas fa-share"></i>
-         Share <span class="share-icons">
+         Share <span class="share-icons" style="float:right">
         <i class="fab fa-facebook"></i>
         <i class="fab fa-twitter"></i>
         <i class="fas fa-envelope"></i>
 
      </div>
+    
       </div>
       <div class="contents">
      <% for (var i = 0; i < shots.length; i++) { %>

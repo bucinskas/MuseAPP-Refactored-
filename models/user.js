@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 const UserSchema = new mongoose.Schema({
-  //username: {type: String, unique: true, required: true},
-  avatar: { type: String, default: "https://thumbnailer.mixcloud.com/unsafe/160x160/tmp/d/e/4/e/ed3c-999c-49ef-9136-f7d9e0139394" },
-  //lastName: String, 
+  username: {type: String, unique: true}, //required: true},
+  email: String, //required: true},
+  avatar: { type: String, default: "https://res.cloudinary.com/dnau0mzjg/image/upload/v1542579459/user.png" },
+  firstName: String,
+  lastName: String, 
+  bio: String,
+  location: String,
+  createdAt: { type: Date, default: Date.now }
   //bio: String, 
   //location: String, 
     //unique: true, 

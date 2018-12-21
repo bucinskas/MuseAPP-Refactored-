@@ -9,7 +9,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser'); 
 const logger = require('morgan');
 const session = require("express-session");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose"); 
 const methodOverride = require("method-override");
 
 
@@ -17,9 +17,12 @@ const methodOverride = require("method-override");
 // required with passport js 
 const User = require('./models/user');
 
-const indexRouter = require('./routes/index');
+
+const usersRouter = require('./routes/users');
 const shotsRouter = require('./routes/shots');
 const commentsRouter = require('./routes/comments');
+
+const indexRouter = require('./routes/index');
 
 
 const app = express();
@@ -41,6 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -51,7 +55,8 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'simple secret',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  
 }));
 
 app.locals.moment = require('moment');
@@ -67,10 +72,10 @@ passport.deserializeUser(User.deserializeUser());
 
 // set local variables middleware 
 app.use(function(req, res, next){
-  //req.user = {
-    //"_id" : "5bcd9b04112c991b2c908f13",
-    //"username" : "martynas"
-  //}
+  // req.user = {
+  //   "_id" : "5bdc44f59adc9b0ec21c1fe4",
+  //   "username" : "bucinskasm"
+  // }
   res.locals.currentUser = req.user; 
   // set default page title 
   res.locals.title = "Mute APP";
@@ -85,9 +90,13 @@ app.use(function(req, res, next){
 }); 
 
 // mount routes 
-app.use('/', indexRouter);
+
+app.use('/users', usersRouter);
 app.use('/shots', shotsRouter);
 app.use('/shots/:id/comments', commentsRouter);
+
+app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

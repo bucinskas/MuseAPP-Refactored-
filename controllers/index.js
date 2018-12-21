@@ -10,6 +10,10 @@ cloudinary.config({
 
 
 module.exports = {
+  async displayAllArtists(req, res, next) {
+    let users = await User.find({}); 
+    res.render("artists", {users});
+  },
   getRegister(req,res, next) {
       res.render("register");
   },
@@ -18,10 +22,9 @@ module.exports = {
   },
   async postRegister(req, res, next) {
     const newUser = new User({
+        username: req.body.username,
         firstName: req.body.firstName,
         email: req.body.email,
-        username: req.body.username,
-        email: req.body.email
     });
     await User.register(newUser, req.body.password);
     passport.authenticate('local', {
@@ -38,18 +41,6 @@ module.exports = {
   getLogout(req, res, next) {
     req.logout();
     res.redirect('/');
-  },
-  async displayAllArtists(req, res, next) {
-    let users = await User.find({}); 
-    res.render("artists", {users});
-  },
-  async getArtist(req, res, next) {
-    let user = await User.findById(req.params.username);
-    let shots = await Shot.find().where('author').equals(user._id).populate("author").exec(); 
-    res.render("users/show", {user, shots});
-  },
-  async updateUser(req, res, next) {
-    let user = await User.findByIdAndUpdate(req.session.userId);
   }
 }
 

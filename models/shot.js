@@ -34,4 +34,11 @@ const shotSchema = new mongoose.Schema({
     });
   });
   
+
+// pre-hook middleware to populate author in post show route
+shotSchema.pre('findOne', function(next) {
+  this.populate('author');
+  next();
+});
+
 module.exports = mongoose.model("Shot", shotSchema);

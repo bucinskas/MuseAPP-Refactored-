@@ -5,6 +5,9 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #191919;
 }
 
@@ -57,6 +60,14 @@ header .user-tools .user-info {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+header .user-tools .user-info li:first-child {
+  margin: 0;
+}
+
+header .user-tools .user-info li:nth-child(2) {
+  margin-left: 8px;
 }
 
 header .user-tools .user-info img {
@@ -358,7 +369,11 @@ header .user-tools ul li {
 }
 
 .shots .shot .meta .shotStatsCount .shotLikesCount {
-  margin-right: 10px;
+  margin-right: 7px;
+}
+
+.shots .shot .meta .shotStatsCount .shotCommentsCount {
+  margin-right: 7px;
 }
 
 .shots .shot .meta i {
@@ -592,7 +607,7 @@ header .user-tools ul li {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 /  3;
-  margin-top: 140px;
+  margin-top: 100px;
 }
 
 .showDiv .contents img {
@@ -612,10 +627,6 @@ header .user-tools ul li {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 / 3;
-}
-
-.showDiv .shot-stats span {
-  float: right;
 }
 
 .showDiv .shot-stats .shot-likes {
@@ -682,14 +693,7 @@ header .user-tools ul li {
   font-size: 1,5em;
 }
 
-.comments-section .pull-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0 0 20px 50px;
-}
-
-.comments-section .pull-right #btn {
+.comments-section textarea #btn {
   padding: 2px 5px;
   margin-right: 10px;
   text-decoration: none;
@@ -701,7 +705,7 @@ header .user-tools ul li {
   cursor: pointer;
 }
 
-.comments-section .pull-right #btn a {
+.comments-section textarea #btn a {
   color: #fff;
   text-decoration: none;
 }

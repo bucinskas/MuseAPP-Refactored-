@@ -4,16 +4,9 @@
    <div><input type="text" name="shot[title]" value="<%=shot.title%>"></div>
    <div><input type="text" name="shot[body]" value="<%=shot.body%>"></div>
    <div>
-     <input type="file" id="imageUpload" accept="images/*" name="images" multiple/>
-     <% shot.images.forEach(function(image, i){ %>
-      <div>
-      <img src="<%=image.url%>" width="50px">
-      <label for="image<%=i%>">Delete?</label>
-      <input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%=i%>" value="<%=image.public_id%>">
-      </div>
-     <% }); %>
+     <input type="file" id="imageUpload" accept="image/*" name="image" multiple/>
    </div>
-   <button class="submit-shot-button">Submit</button>
+     <button class="submit-shot-button">Submit</button>
 </form>
 
 

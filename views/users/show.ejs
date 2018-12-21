@@ -8,16 +8,20 @@
       <div class="profile-info">
       <img src="<%= user.avatar %>" class="profile-image" alt="user profile image">
       <h1><%=user.username%></h1>
-      <p>Dublin, Ireland</p>
-      <p>Illustrator & Logo designer. I work using digital tools, specially vector. Contact me: yogaperdana7@gmail.com</p>
-      <p class="authorName"><%=user.firstName%> <%=user.lastName%></p>
+      <p>Location:<%= user.location %> </p>
+      <p>Bio:<%=user.bio%></p>
+      <p class="authorName"><%=user.firstName%></p>
+      <p>Joined <span style="font-weight: bold"><%= moment(user.createdAt).format("MMMM YYYY") %></span></p>
       <p><%=user.email%></p>
+
+        <% if(currentUser && currentUser._id.equals(user._id)) { %>
+      <button><a href="/users/<%=user._id%>/edit">Update profile</a></button>
+        <% } %>
       </div>
       <div class="profile-stats">
-      <p>Projects: 100</p>
-      <p><i class="fas fa-heart"></i>Likes: 150</p>
-      <p>Followers: 99</p>
-      <p>Following: 89</p>
+      <p>Shots: <%= shots.length %></p>
+      <p>Likes:   <%= likes %></p>
+      <p>Comments: <%= comments %></p>
       </div>
     
    </aside>
