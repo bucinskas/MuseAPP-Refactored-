@@ -30,7 +30,7 @@ router.get('/:id/edit', userProfileOwnership, getProfileEdit);
 
 
 /* PUT PROFILE/:user_id */
-router.put('/:id', userProfileOwnership, upload.single('avatar'), asyncErrorHandler(updateProfile));
+router.put('/:id', userProfileOwnership, upload.single('image'), asyncErrorHandler(updateProfile));
 
 
 

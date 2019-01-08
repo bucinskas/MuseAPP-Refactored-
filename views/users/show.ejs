@@ -3,26 +3,26 @@
 
 
 <div class="wrapper">
-  
+     <div class="profile-stats">
+      <p><i class="fas fa-folder"></i><%= shots.length %></p>
+      <p><i class="fas fa-heart"></i><%= likes %></p>
+      <p><i class="fas fa-comment"></i><%= comments %></p>
+      </div>    
    <aside class="sidebar">
       <div class="profile-info">
       <img src="<%= user.avatar %>" class="profile-image" alt="user profile image">
       <h1><%=user.username%></h1>
-      <p>Location:<%= user.location %> </p>
-      <p>Bio:<%=user.bio%></p>
-      <p class="authorName"><%=user.firstName%></p>
+      <p class="userLocation"><%= user.location %> </p>
+      <p> <%=user.bio%></p>
+     
       <p>Joined <span style="font-weight: bold"><%= moment(user.createdAt).format("MMMM YYYY") %></span></p>
-      <p><%=user.email%></p>
+     
 
         <% if(currentUser && currentUser._id.equals(user._id)) { %>
-      <button><a href="/users/<%=user._id%>/edit">Update profile</a></button>
+      <button class="updateProfile"><a href="/users/<%=user._id%>/edit">Update profile</a></button>
         <% } %>
       </div>
-      <div class="profile-stats">
-      <p>Shots: <%= shots.length %></p>
-      <p>Likes:   <%= likes %></p>
-      <p>Comments: <%= comments %></p>
-      </div>
+   
     
    </aside>
     

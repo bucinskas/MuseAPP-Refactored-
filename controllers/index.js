@@ -25,6 +25,8 @@ module.exports = {
         username: req.body.username,
         firstName: req.body.firstName,
         email: req.body.email,
+        bio: req.body.bio,
+        location: req.body.location
     });
     await User.register(newUser, req.body.password);
     passport.authenticate('local', {

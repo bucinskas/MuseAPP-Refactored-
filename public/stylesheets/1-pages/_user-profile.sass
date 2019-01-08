@@ -1,11 +1,20 @@
 
 .wrapper
   display: grid     
-  grid-template-columns: 30% 70%
-
   grid-gap: 16px
-  max-width: 1100px
+  max-width: 1050px
   margin: 30px auto
+  .profile-stats 
+    display: flex
+    background: white
+    justify-content: center
+    border-bottom: 1px solid #ccc
+    border-radius: 5px
+    padding: 4px   
+    p 
+      margin-right: 10px
+    i 
+      margin-right: 10px  
   .sidebar 
     display: grid 
     text-align: center
@@ -17,12 +26,28 @@
       border-bottom: 1px solid #ccc 
       h1 
         margin: 0  
+      .userLocation 
+        color: #999
+        font-size: 15px
+      .updateProfile
+        padding: 5px 10px
+        margin: 10px
+        text-decoration: none
+        border-radius: 3px
+        border: none 
+        background-color: black
+        color: #fff 
+        font-family: 'Lato'
+        cursor: pointer
+        a 
+          color: #fff 
+          text-decoration: none 
+          font-weight: bold    
     .profile-image 
       width: 150px
       height: 150px
       border-radius: 100px 
-    .profile-stats 
-      padding: 20px 30px   
+     
 
   .content  
     display: grid

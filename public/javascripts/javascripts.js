@@ -5,6 +5,12 @@ if (counter2.innerHTML === " 1 ") {
   counter.innerHTML = "1 Comment"
 }
 
+
+// OTHER POSSIBLE WAY 
+// let titleText = `Favorite ${this.props.type}`;
+//     if (this.props.children instanceof Array) {
+//     	titleText += 's';
+//     }
 // counter.innerHTML = "1 comment";
 
 // let removalAmt = 1

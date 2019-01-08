@@ -97,15 +97,15 @@ module.exports = {
     // // redirect to show page  
     // res.redirect(`/shots/${shot.id}`);
     if(req.file) {
+      
       cloudinary.v2.uploader.upload(req.file.path, async (result) => { 
         req.body.shot.image = result.secure_url;
         let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);
-        //req.session.success = 'Post successfully updated'
         res.redirect(`/shots/${shot.id}`);
       });
   } else {
-      let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);
-      //req.session.success = 'Post successfully updated'
+      let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);    
+      req.session.success = 'Your post has been successfully updated';
       res.redirect(`/shots/${shot.id}`);
   }
   },

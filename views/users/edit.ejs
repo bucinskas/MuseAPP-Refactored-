@@ -5,18 +5,23 @@
 
 <form id="updateForm" action="/users/<%=user.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
-<div><input id="id"  type="text" name="username" value="<%= user.username %>" ></div>
-<div><input id="id"  type="text" name="firstName" value="<%= user.firstName %>" ></div>
-<div><input id="id"  type="email" name="email" value="<%= user.email %>" ></div>
-<div><input id="id"  type="text" name="bio" value="<%= user.bio %>" ></div>
-<div><input id="id"  type="text" name="location" value="<%= user.location %>" ></div>
 
 <div>
-<label>Change avatar</label>
-<img src="<%= user.avatar %>" style="width: 100px; height: 100px; border-radius: 100px">
+<img src="<%= user.avatar %>" style="width: 80px; height: 80px; border-radius: 100px">
  <input type="file" class="imageInput" id="imageUpload" name="image" accept="image/*">
 
 </div>
+
+<label>username</label>
+<div><input id="id"  type="text" name="username" value="<%= user.username %>" ></div>
+<label>firstname</label>
+<div><input id="id"  type="text" name="firstName" value="<%= user.firstName %>" ></div>
+<label>email</label>
+<div><input id="id"  type="email" name="email" value="<%= user.email %>" ></div>
+<label>bio</label>
+<div><input id="id"  type="text" name="bio" value="<%= user.bio %>" ></div>
+<label>location</label>
+<div><input id="id"  type="text" name="location" value="<%= user.location %>" ></div>
 
 <div><a href="/users/<%= user._id %>">Go Back</a></div>
 

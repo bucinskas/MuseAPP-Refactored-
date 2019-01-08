@@ -425,14 +425,54 @@ header .user-tools ul li {
   text-align: center;
 }
 
+.successMessage {
+  color: #fff;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #7bbb5e;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer {
+  background-color: white;
+  text-align: center;
+  padding: 10px 10px;
+}
+
+footer h1 {
+  margin: 0;
+  font-size: 15px;
+  color: #999;
+}
+
 .wrapper {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 30% 70%;
-      grid-template-columns: 30% 70%;
   grid-gap: 16px;
-  max-width: 1100px;
+  max-width: 1050px;
   margin: 30px auto;
+}
+
+.wrapper .profile-stats {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.wrapper .profile-stats p {
+  margin-right: 10px;
+}
+
+.wrapper .profile-stats i {
+  margin-right: 10px;
 }
 
 .wrapper .sidebar {
@@ -454,14 +494,33 @@ header .user-tools ul li {
   margin: 0;
 }
 
+.wrapper .sidebar .profile-info .userLocation {
+  color: #999;
+  font-size: 15px;
+}
+
+.wrapper .sidebar .profile-info .updateProfile {
+  padding: 5px 10px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 3px;
+  border: none;
+  background-color: black;
+  color: #fff;
+  font-family: 'Lato';
+  cursor: pointer;
+}
+
+.wrapper .sidebar .profile-info .updateProfile a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .wrapper .sidebar .profile-image {
   width: 150px;
   height: 150px;
   border-radius: 100px;
-}
-
-.wrapper .sidebar .profile-stats {
-  padding: 20px 30px;
 }
 
 .wrapper .content {

@@ -1,6 +1,12 @@
 const User = require("../models/user");
 const Shot = require("../models/shot")
 const Comment = require("../models/comment")
+const cloudinary = require("cloudinary");
+cloudinary.config({
+  cloud_name: 'dnau0mzjg',
+  api_key: '591971121348592',
+  api_secret: process.env.CLOUDINARY_SECRET
+});
 
 
 module.exports = {
@@ -21,15 +27,39 @@ module.exports = {
   },
   async updateProfile(req, res, next) {
     let updateUser = await User.findById(req.params.id);
-    //eval(require('locus'));
-    var changeFlag = false; //only update if a change has been made
-    if(req.body.username !== updateUser.username) {  
-    updateUser.username = req.body.username; changeFlag = true; } 
+    
+    updateUser.username = req.body.username 
     updateUser.email = req.body.email; 
     updateUser.firstName = req.body.firstName; 
-    if(req.body.bio !== updateUser.bio) {  
-    updateUser.bio = req.body.bio; changeFlag = true; }
-    
+    updateUser.bio = req.body.bio;
+    updateUser.location = req.body.location;
+
+
+    if(req.file){
+      // CLOUDINARY
+    //cloudinary.config(cloudinaryConf);
+  
+      // set image location to correct folder on Cloudinary
+ 
+  
+      // delete previous image (if one existed) then upload the new one
+      if(updateUser.avatarId){
+          await cloudinary.v2.uploader.destroy(updateUser.avatarId);
+      }
+      
+      // Upload the image to Cloudinary and wait for a response
+      await cloudinary.v2.uploader.upload(req.file.path, {public_id: public_id}, async function(err, result) {
+          if(err) {
+              req.session.error = "There was a problem uploading your profile picture, please try again"; 
+              return res.redirect("/users/" + updateUser._id + "/edit");
+          }
+          // add cloudinary url for the image to the newUser
+          updateUser.avatar = result.secure_url;
+          // add image's public_id to newUser object
+          updateUser.avatarId = result.public_id;
+          
+        });
+      }
     updateUser.save()
     req.login(updateUser, function(err) {
       if (err) return next(err)
@@ -38,6 +68,6 @@ module.exports = {
       console.info(req.user);
     });
     req.session.success = "Your account has been updated";
-    res.redirect(`/users/${updateUser.id}`)
+    res.redirect(`/users/${updateUser.id}/edit`)
   }
 }
