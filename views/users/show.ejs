@@ -34,10 +34,19 @@
      <p class="title"><a href="/shots/<%=shot.id%>"></img><%=shot.title.substring(0,25)%></a>..</p>
       <p><a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a></p>
       <p><%=shot.category%></p>
+      <div class="shotStatsCount">
+        
+        <span class="shotLikesCount"><i class="fas fa-heart"></i><a href="/shots/<%=shot.id%>"><%=shot.likes.length%></a></span>
+        <span class="shotCommentsCount"><i class="fas fa-comment"></i><a href="/shots/<%=shot.id%>"><%=shot.comments.length%></a></span>
+
+        </div>
     </div>
+    
       <% }); %>
     
   </article>
+
+
     
 </div>
 

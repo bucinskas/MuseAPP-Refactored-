@@ -22,25 +22,21 @@ module.exports = {
     await shot.comments.push(comment._id);
     await shot.save();
     let author = req.user.local.username;
-    // eval(require('locus')); 
-    //req.session.success = "Comment created successfully";
     res.status(200).json({shot: shot, comment: comment, author: author});
   },
   async commentUpdate(req, res, next) {
-   let comment = await Comment.findByIdAndUpdate(req.params.comment_id, {new: true}, req.body.comment);
-   //if (req.xhr) {
+   let comment = await Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, {new: true});
+   let author = req.user.local.username;
    res.status(200).json({comment: comment, author: author});
-   //} else {
-    //res.redirect(`/shots/${req.params.id}`);
-   //}
   },
   async commentDestroy(req, res, next) {
-    await Shot.findByIdAndUpdate(req.params.id, {
-        $pull: { comments: req.params.comment_id }
-    });
+    // await Shot.findByIdAndUpdate(req.params.id, {
+    //     $pull: { comments: req.params.comment_id }
+    // });
+    let comment = await Comment.findById(req.params.comment_id);
     await Comment.findByIdAndDelete(req.params.comment_id);
     //req.session.success = "Comment removed successfully"; 
-    res.status(200).json();
+    res.status(200).json({comment: comment});
    // res.redirect(`/shots/${req.params.id}`);
   }
  }

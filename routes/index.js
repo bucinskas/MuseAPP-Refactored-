@@ -2,15 +2,12 @@ const User = require("../models/user");
 const Shot = require("../models/shot");
 const express = require('express');
 const router = express.Router();
-const multer = require("multer");
-const upload = multer({'dest': 'uploads/'});
 const passport = require("passport");
 const {postRegister,
        postLogin,
        getLogout,
        getRegister,
        getLogin,
-       displayAllArtists
       } = require('../controllers');
 const {asyncErrorHandler,
        userProfileOwnership} = require('../middleware');
@@ -21,14 +18,11 @@ router.get('/', (req, res, next) => {
 });
 
 
-
-router.get("/artists", displayAllArtists);
-
 /* GET register. */
 router.get('/register', getRegister);
 
 /* POST REGISTER . */
-router.post('/register', upload.single('avatar'), asyncErrorHandler(postRegister));
+router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET login */
 router.get('/login', getLogin);
@@ -40,12 +34,10 @@ router.post('/login', postLogin);
 router.get('/logout', getLogout);
 
 
-
 /*  GET forgot-pw */
 router.get('/forgot-pw', (req, res, next) => {
   res.send("GET /forgot-pw");
 });
-
 
 
 /*  PUT forgot-pw */
@@ -63,8 +55,6 @@ router.get('/reset/:token', (req, res, next) => {
 router.put('/reset/:token', (req, res, next) => {
   res.send("GET /reset/:token");
 });
-
-
 
 
 

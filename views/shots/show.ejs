@@ -48,7 +48,7 @@
         <div class="field">
           <textarea type="text" name="comment[body]" id="comment-body" placeholder="Your comment"></textarea>
         </div>
-          <button id="btn">Submit comment</button>
+          <button id="btn">Comment</button>
       </form>
    <% } %>
 
@@ -65,7 +65,7 @@
                   </div>
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
                   <div>
-                  <button class="toggleEditForm">Edit</button>
+                  <button class="toggleEditForm" id="btn">Edit</button>
                   <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
                    <textarea name="comment[body]"><%=comment.body%></textarea>
                   <input type="submit" value="Update">

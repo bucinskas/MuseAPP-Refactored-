@@ -16,8 +16,65 @@
 // });
 
 
+{/* <div class="content">
+<a href="/users/<%=shot.author.id%>"><img src="<%= comment.author.avatar %>" class="profile-comment-image" alt="user profile image"></a>
+<a href="/users/<%=comment.author.id%>" class="comment-author">${ data.comment.author }</a>
+ <div class="comment-body">
+	   <p>${ data.comment.body }</p>
+	   </div>
+	   <div class="comment-meta">
+	   <span>${ moment(data.comment.createdAt).fromNow() }</span>
+	  </div>
+	  <div>
+// 	  <button class="toggleEditForm" id="btn">Edit</button>
+// 	  <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
+// 	   <textarea name="comment[body]">${ data.comment.body }</textarea>
+// 	  <input type="submit" value="Update">
+// 	</form>
+// 	   <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+// 	 <button class="delete-comment-button" id="btn">Delete</button>
+// 	 </form>
+// 	  </div>  */}
 
-$('#comments-list').on('submit', '.delete-item-form', function (e) {
+
+// $('#comment-form').submit(function(e) {
+// 	e.preventDefault();
+// 	let formData = $(this).serialize();
+// 	let url = $(this).attr('action');
+// 	$.post(url, formData)
+// 		.done(function(data) {
+// 			$('#comment-body').val('');
+// 			$('#comment-form').before(`
+// 			<div class="content">
+// 			<a href="/users/<%=shot.author.id%>"><img src="<%= comment.author.avatar %>" class="profile-comment-image" alt="user profile image"></a>
+// 			<a href="/users/<%=comment.author.id%>" class="comment-author">${ data.comment.author }</a>
+// 			 <div class="comment-body">
+// 				   <p>${ data.comment.body }</p>
+// 				   </div>
+// 				   <div class="comment-meta">
+// 				   <span>${ moment(data.comment.createdAt).fromNow() }</span>
+// 				  </div>
+// 				  <div>
+// 				  <button class="toggleEditForm" id="btn">Edit</button>
+// 				  <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
+// 				   <textarea name="comment[body]">${ data.comment.body }</textarea>
+// 				  <input type="submit" value="Update">
+// 				</form>
+// 				   <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+// 				 <button class="delete-comment-button" id="btn">Delete</button>
+// 				 </form>
+// 				  </div> 
+// 			`);
+// 		})
+// 		.fail(function(jqXHR, exception) {
+// 			alert(exception);
+// 		});
+// });
+
+
+
+
+$('.comments-list').on('submit', '.delete-item-form', function (e) {
 	e.preventDefault();
 	var response = confirm('Are you sure?');
 	if (response) {
@@ -29,7 +86,7 @@ $('#comments-list').on('submit', '.delete-item-form', function (e) {
 			$form: $form
 		}).done(function (data) {
 			console.log('Successfully deleted!');
-			$form.closest().remove();
+			$form.closest('.content').remove();
 		}).fail(function (jqXHR, exception) {
 			alert(exception);
 		});

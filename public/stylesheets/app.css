@@ -92,10 +92,20 @@ header .user-tools ul li {
   color: white;
 }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 850px) {
   header {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+  }
+  header > a {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+  }
+}
+
+@media all and (max-width: 920px) {
+  .user-tools > ul {
+    padding: 0;
   }
 }
 
@@ -233,13 +243,22 @@ header .user-tools ul li {
 
 .add-new-shot {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 40px auto;
+  height: 100vh;
 }
 
 .add-new-shot .add-new-shot-header {
   text-align: center;
   font-weight: bold;
   font-size: 35px;
+}
+
+.add-new-shot .newShot textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px 13px 20px 13px;
+  border: none;
+  border-radius: 10px;
 }
 
 .add-new-shot .newShot input {
@@ -254,8 +273,9 @@ header .user-tools ul li {
 .add-new-shot .newShot .submit-shot-button {
   margin-top: 10px;
   width: 30%;
-  background: #ea4c88;
+  background: #444;
   color: #fff;
+  font-weight: bold;
   border: none;
   border-radius: 10px;
   padding: 10px 13px 10px 13px;
@@ -302,9 +322,9 @@ header .user-tools ul li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 970px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px 50px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -326,9 +346,9 @@ header .user-tools ul li {
   -ms-grid-rows: minmax(158px, auto);
       grid-template-rows: minmax(158px, auto);
   justify-items: center;
-  max-width: 970px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px 50px;
 }
 
 .shots .shot {
@@ -403,19 +423,6 @@ header .user-tools ul li {
   margin: 0;
 }
 
-.footer {
-  background: #fff;
-}
-
-.footer .footer-content1 {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.footer .footer-content1 p {
-  margin: 0;
-}
-
 .errorMessage {
   color: #fff;
   padding: 15px;
@@ -436,6 +443,7 @@ header .user-tools ul li {
 
 footer {
   background-color: white;
+  border-top: 1px solid #e5e5e5;
   text-align: center;
   padding: 10px 10px;
 }
@@ -443,15 +451,17 @@ footer {
 footer h1 {
   margin: 0;
   font-size: 15px;
+  font-weight: normal;
   color: #999;
 }
 
 .wrapper {
   display: -ms-grid;
   display: grid;
-  grid-gap: 16px;
+  grid-column-gap: 16px;
+  grid-row-gap: 20px;
   max-width: 1050px;
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
 .wrapper .profile-stats {
@@ -465,14 +475,17 @@ footer h1 {
   border-bottom: 1px solid #ccc;
   border-radius: 5px;
   padding: 4px;
+  margin-top: 20px;
 }
 
 .wrapper .profile-stats p {
   margin-right: 10px;
+  color: #bbb;
 }
 
 .wrapper .profile-stats i {
   margin-right: 10px;
+  color: #444;
 }
 
 .wrapper .sidebar {
@@ -487,7 +500,6 @@ footer h1 {
 
 .wrapper .sidebar .profile-info {
   padding: 20px 30px;
-  border-bottom: 1px solid #ccc;
 }
 
 .wrapper .sidebar .profile-info h1 {
@@ -505,9 +517,8 @@ footer h1 {
   text-decoration: none;
   border-radius: 3px;
   border: none;
-  background-color: black;
-  color: #fff;
-  font-family: 'Lato';
+  background-color: #444;
+  color: #444;
   cursor: pointer;
 }
 
@@ -529,7 +540,7 @@ footer h1 {
   -ms-grid-columns: (minmax(200px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: minmax(150px, 1fr);
-  grid-gap: 16px;
+  grid-gap: 20px;
 }
 
 .wrapper .content .panel {
@@ -539,7 +550,7 @@ footer h1 {
           box-shadow: 0.2px 0.2px 0.2px 0.2px rgba(25, 25, 25, 0.2);
   padding: 10px 10px 6px 10px;
   width: 246px;
-  height: 292.50px;
+  height: 320px;
 }
 
 .wrapper .content .panel img {
@@ -554,6 +565,36 @@ footer h1 {
 .wrapper .content .panel .title {
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.wrapper .content .panel .shotStatsCount {
+  border-top: 1.2px #f2f2f2 solid;
+  margin-top: 2px;
+  padding-top: 2px;
+}
+
+.wrapper .content .panel .shotStatsCount a {
+  color: black;
+}
+
+.wrapper .content .panel .shotStatsCount .shotLikesCount {
+  margin-right: 7px;
+}
+
+.wrapper .content .panel .shotStatsCount .shotCommentsCount {
+  margin-right: 7px;
+}
+
+.wrapper .content .panel i {
+  font-size: 15px;
+  margin-right: 7px;
+  color: grey;
+  margin-left: 5px;
+}
+
+.wrapper footer {
+  padding: 0;
+  margin: 0;
 }
 
 .showDiv {
@@ -613,10 +654,10 @@ footer h1 {
   text-decoration: none;
   border-radius: 3px;
   border: none;
-  background-color: black;
+  background-color: #444;
   color: #fff;
-  font-family: 'Lato';
   cursor: pointer;
+  font-weight: bold;
 }
 
 .showDiv .shot-description .shot-buttons #btn a {
@@ -738,7 +779,7 @@ footer h1 {
 }
 
 .comments-section .comment-meta {
-  margin: 10px 0 0 50px;
+  margin: 10px 0 10px 50px;
 }
 
 .comments-section textarea {
@@ -752,21 +793,16 @@ footer h1 {
   font-size: 1,5em;
 }
 
-.comments-section textarea #btn {
-  padding: 2px 5px;
-  margin-right: 10px;
+.comments-section #btn {
+  padding: 5px 10px;
+  margin: 5px 0 5px 0;
   text-decoration: none;
   border-radius: 3px;
   border: none;
-  background-color: black;
-  color: #fff;
-  font-family: 'Lato';
+  background-color: #444;
+  color: WHITE;
   cursor: pointer;
-}
-
-.comments-section textarea #btn a {
-  color: #fff;
-  text-decoration: none;
+  font-weight: bold;
 }
 
 .edit-comment-form {
@@ -780,13 +816,35 @@ footer h1 {
   padding: 10px 0 10px 0;
 }
 
-.usersDiv {
+.userInformation {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.userInformation .usersDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding: 20px 0 20px 0;
 }
 
+.userInformation .usersDiv .meta-info {
+  padding: 0 10px;
+}
+
+.userInformation .usersDiv .userInformationPic {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
+
+html {
+  height: 100vh;
+}
+
 body {
+  min-height: 100vh;
+  height: 100%;
   background: #f2f2f2;
   font: 14px/1.6 "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
@@ -842,6 +900,10 @@ a:hover, a:focus {
 i {
   font-size: 20px;
   margin-right: 10px;
+}
+
+h2 {
+  margin: 0;
 }
 
 /*! normalize.scss v0.1.0 | MIT License | based on git.io/normalize */

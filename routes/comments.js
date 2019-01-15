@@ -9,14 +9,15 @@ const {
   commentDestroy
 } = require("../controllers/comments");
 
+router.use(isLoggedIn);
 
 /* POST comments CREATE /posts/:id/comments */
-router.post('/', isLoggedIn, asyncErrorHandler(commentCreate));
+router.post('/', asyncErrorHandler(commentCreate));
 
 /* UPDATE comments :id /comments/:comment_id */
-router.put('/:comment_id', isLoggedIn, isCommentAuthor, asyncErrorHandler(commentUpdate));
+router.put('/:comment_id', isCommentAuthor, asyncErrorHandler(commentUpdate));
 
 /* delete comments :id /posts/:comment_id */
-router.delete('/:comment_id', isLoggedIn, isCommentAuthor, asyncErrorHandler(commentDestroy));  
+router.delete('/:comment_id', isCommentAuthor, asyncErrorHandler(commentDestroy));  
 
 module.exports = router;     

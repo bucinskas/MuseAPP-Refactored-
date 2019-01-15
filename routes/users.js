@@ -4,10 +4,12 @@ const multer = require("multer");
 const upload = multer({'dest': 'uploads/'});
 
 
+
 const {asyncErrorHandler,
       userProfileOwnership} = require("../middleware");
 
 const { getArtist,
+        getAllArtists,
         updateProfile,
         getProfileEdit
   } = require("../controllers/users");
@@ -19,6 +21,8 @@ const { getArtist,
 
 router.get('/:id', getArtist); 
 
+
+router.get("/", asyncErrorHandler(getAllArtists));
 
 /* get PROFILE */
 // prepopulated form 

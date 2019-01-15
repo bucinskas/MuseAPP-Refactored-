@@ -1,19 +1,10 @@
 const User = require("../models/user");
 const Shot = require("../models/shot");
 const passport = require('passport');
-const cloudinary = require("cloudinary");
-cloudinary.config({
-  cloud_name: 'dnau0mzjg',
-  api_key: '591971121348592',
-  api_secret: process.env.CLOUDINARY_SECRET
-});
+
 
 
 module.exports = {
-  async displayAllArtists(req, res, next) {
-    let users = await User.find({}); 
-    res.render("artists", {users});
-  },
   getRegister(req,res, next) {
       res.render("register");
   },

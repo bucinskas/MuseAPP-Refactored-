@@ -7,6 +7,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
+
 module.exports = {
   async getShots(req, res, next) {
       let shots = await Shot.find({}).
@@ -18,21 +19,25 @@ module.exports = {
       res.render("shots/new");
   },
   async shotCreate(req, res, next) {
+
+
+    // UPLOADING MULTIPLE IMAGES
     //req.body.shot.images = []; 
     // for(const file of req.files) {
-    let image = await cloudinary.v2.uploader.upload(req.file.path);    
-    req.body.shot.image = image.secure_url; 
     //   req.body.shot.images.push({
     //     url: image.secure_url,
     //     public_id: image.public_id
     //   });
     // }
-    console.log(req.file)
+
+    let image = await cloudinary.v2.uploader.upload(req.file.path); 
+    req.body.shot.image = image.secure_url; 
     let shot = await Shot.create(req.body.shot);
     shot.author = req.user._id; 
     shot.save();
     //req.session.success = 'Shot created successfully';
     res.redirect(`/shots/${shot.id}`);
+    
     
   },
   

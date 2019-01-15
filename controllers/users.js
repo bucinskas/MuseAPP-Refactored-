@@ -8,8 +8,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-
 module.exports = {
+  async getAllArtists(req, res, next) {
+    let users = await User.find({}); 
+    res.render("users/index", {users});
+  },
   async getArtist(req, res, next) {
     let user = await User.findById(req.params.id);
     let shots = await Shot.find().where('author').equals(user._id).populate("author").exec(); 
@@ -17,10 +20,6 @@ module.exports = {
     let foundLikes = await Shot.find({likes: user._id});
     res.render("users/show", {user, shots,  comments: foundComments.length, likes: foundLikes.length });
   },
-//   async displayProfile(req, res, next) {
-//     let user = await User.findById(req.params.id);
-//     res.render("profile/index", {user});
-//   },
   async getProfileEdit(req, res, next) {
     let user = await User.findById(req.params.id);
     res.render("users/edit", {user});
@@ -41,7 +40,7 @@ module.exports = {
   
       // set image location to correct folder on Cloudinary
  
-  
+      const public_id = "sl-" + process.env.ENV_ID + "/avatars/" + req.file.filename;
       // delete previous image (if one existed) then upload the new one
       if(updateUser.avatarId){
           await cloudinary.v2.uploader.destroy(updateUser.avatarId);

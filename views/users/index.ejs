@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="usersSearch">
+  <p>Search for artists</p>
+</div>
+<div class="userInformation">
+<% users.forEach(function(user){ %>
+  <div class="usersDiv">
+
+  <div>
+  <img src="<%=user.avatar%>" class="userInformationPic">
+  </div>
+
+  <div class="meta-info">
+  <h2><a href="/users/<%=user.id%>"><%=user.username%></a></h2>
+  <span class="locality"><%=user.location%></span>
+  <p><%=user.bio%></p>
+  </div>
+
+
+
+  <div class="player-actions">
+    
+  </div>
+
+  </div>
+<% }) %>
+</div>
