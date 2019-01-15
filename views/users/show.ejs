@@ -19,7 +19,10 @@
      
 
         <% if(currentUser && currentUser._id.equals(user._id)) { %>
-      <button class="updateProfile"><a href="/users/<%=user._id%>/edit">Update profile</a></button>
+
+        <form action="/users/<%=user._id%>/edit">
+          <input type="submit" value="Update profile" class="updateProfile" />
+        </form>
         <% } %>
       </div>
    

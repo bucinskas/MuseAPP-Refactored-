@@ -40,10 +40,18 @@ header nav ul li {
   font-weight: bold;
 }
 
-header .logo img {
-  width: 60px;
-  height: 55px;
+header .logo {
   margin-left: 40px;
+  font-family: 'Staatliches', cursive;
+  font-size: 2.5em;
+}
+
+header .logo a {
+  color: #fff;
+}
+
+header .logo a:hover {
+  color: #a4a4a4;
 }
 
 header .user-tools {
@@ -115,6 +123,7 @@ header .user-tools ul li {
   border-radius: 3px;
   padding: 5px;
   border: 0 none;
+  font-weight: sebibold;
 }
 
 .main-register {
@@ -460,7 +469,7 @@ footer h1 {
   display: grid;
   grid-column-gap: 16px;
   grid-row-gap: 20px;
-  max-width: 1050px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -518,13 +527,8 @@ footer h1 {
   border-radius: 3px;
   border: none;
   background-color: #444;
-  color: #444;
-  cursor: pointer;
-}
-
-.wrapper .sidebar .profile-info .updateProfile a {
   color: #fff;
-  text-decoration: none;
+  cursor: pointer;
   font-weight: bold;
 }
 
