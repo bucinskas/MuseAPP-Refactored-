@@ -1,13 +1,36 @@
 <% layout('layouts/boilerplate') -%>
 
+
+
+
+<div class="mainEditShot">
+<div class="shotEdit">
+
 <form action="/shots/<%=shot._id%>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
-   <div><input type="text" name="shot[title]" value="<%=shot.title%>"></div>
-   <div><input type="text" name="shot[body]" value="<%=shot.body%>"></div>
+<h1>Edit shot</h1>
    <div>
+   <label>Title</label>
+   <input type="text" name="shot[title]" value="<%=shot.title%>">
+   </div>
+
+
+   <div>
+    <label>Description</label>
+   <input type="text" name="shot[body]" value="<%=shot.body%>">
+   </div>
+
+   <div>
+   <label>Image</label>
      <input type="file" id="imageUpload" accept="image/*" name="image" multiple/>
    </div>
      <button class="submit-shot-button">Submit</button>
+
 </form>
+
+</div>  
+</div>
+
+
 
 
 <script src="/javascripts/shot-edit.js"></script>

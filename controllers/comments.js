@@ -33,8 +33,8 @@ module.exports = {
     // await Shot.findByIdAndUpdate(req.params.id, {
     //     $pull: { comments: req.params.comment_id }
     // });
-    let comment = await Comment.findById(req.params.comment_id);
-    await Comment.findByIdAndDelete(req.params.comment_id);
+   
+    let comment = await Comment.findByIdAndDelete(req.params.comment_id);
     //req.session.success = "Comment removed successfully"; 
     res.status(200).json({comment: comment});
    // res.redirect(`/shots/${req.params.id}`);

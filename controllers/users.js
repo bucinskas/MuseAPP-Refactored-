@@ -47,7 +47,7 @@ module.exports = {
       }
       
       // Upload the image to Cloudinary and wait for a response
-      await cloudinary.v2.uploader.upload(req.file.path, {public_id: public_id}, async function(err, result) {
+      await cloudinary.v2.uploader.upload(req.file.path, {"width":400,"height":400,"crop":"crop", "gravity": "face", "radius": "max", public_id: public_id}, async function(err, result) {
           if(err) {
               req.session.error = "There was a problem uploading your profile picture, please try again"; 
               return res.redirect("/users/" + updateUser._id + "/edit");

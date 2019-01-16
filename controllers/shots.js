@@ -30,7 +30,9 @@ module.exports = {
     //   });
     // }
 
-    let image = await cloudinary.v2.uploader.upload(req.file.path); 
+    let image = await cloudinary.v2.uploader.upload(req.file.path, {"width":400,"height":400,"crop":"fill", "gravity":"auto"}); 
+   
+   
     req.body.shot.image = image.secure_url; 
     let shot = await Shot.create(req.body.shot);
     shot.author = req.user._id; 
@@ -102,8 +104,7 @@ module.exports = {
     // // redirect to show page  
     // res.redirect(`/shots/${shot.id}`);
     if(req.file) {
-      
-      cloudinary.v2.uploader.upload(req.file.path, async (result) => { 
+     await cloudinary.v2.uploader.upload(req.file.path, async (result) => { 
         req.body.shot.image = result.secure_url;
         let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);
         res.redirect(`/shots/${shot.id}`);
@@ -113,6 +114,10 @@ module.exports = {
       req.session.success = 'Your post has been successfully updated';
       res.redirect(`/shots/${shot.id}`);
   }
+
+
+   
+        
   },
   async shotDestroy(req, res, next) {
 
