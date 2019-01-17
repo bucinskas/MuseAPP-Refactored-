@@ -80,19 +80,8 @@
   </div>
 
     
-
-
-    
-
-
-
-
 </div>
       <div class="shot-stats">
-
-
-
-
 
         <div class="shot-likes">
         <span id="likes-main">
@@ -100,22 +89,22 @@
         Likes 
         <span id="loves-count" style="float:right"><%=shot.likes.length%></span></p>
         </span>
-      
         </div>
           
-    
-        <div class="shot-share"><p><i class="fas fa-share"></i>
+        <div class="shot-share">
+        <i class="fas fa-share"></i>
          Share <span class="share-icons" style="float:right">
         <i class="fab fa-facebook"></i>
         <i class="fab fa-twitter"></i>
         <i class="fas fa-envelope"></i>
-
-     </div>
+        </div>
     
       </div>
+
       <div class="contents">
      <% for (var i = 0; i < shots.length; i++) { %>
     <div class="nested">
+    
     <a href="/shots/<%= shots[i].id %>"><img src="<%= shots[i].image %>"></img></a>
     </div>
     <% }; %>
@@ -152,6 +141,7 @@
         window.location.href = "/register?return_url=" + window.location.pathname;
     });
 <% } %>
+
 
 
 

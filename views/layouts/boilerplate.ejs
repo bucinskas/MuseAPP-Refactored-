@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel='stylesheet' href='/stylesheets/app.css' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
      <script
@@ -11,54 +13,32 @@
    <link href="https://fonts.googleapis.com/css?family=Exo+2|Staatliches" rel="stylesheet"> 
   </head>
   <body>
-  <body>
-  <div class="header-banner">
-      <header>
-        <nav>
-        <div class="logo">
-        <a href="/"><p>Muse</p></a>
-        </div>
-          <ul>
+           <ul class="main-nav">
+          <li class="muse-logo"><a href="/">Muse</a></li>
+          <li class="toggle-button"><i class="fas fa-bars"></i></li>
             <li class="active"><a href="/">Shots</a></li>
             <li><a href="/users">Artists</a></li>
             <li><a href="/shots/new">Share now</a></li>
-          </ul>
-        </nav>
-        <div class="user-tools">
-          <ul>
             <% if (!currentUser){ %>
-            <ul>
-            <li><a href="/register">Sign up</a></li>
+            <li class="muse-signup"><a href="/register">Sign up</a></li>
             <li><a href="/login">Sign in</a></li>
            <% } else { %>
-
-           <div class="user-info">
-           <li><img height="30" width="30" border-radius="50%" src="<%=currentUser.avatar%>"></li>
+           <li class="muse-profile-image"><img height="30" width="30" border-radius="50%" src="<%=currentUser.avatar%>"></li>
          <li> <a href="/users/<%= currentUser.id %>">
             <%=currentUser.username%></a></li>
-              </div>
-            <li><a href="/logout">Logout</a></li>
-          
+            <li><a href="/logout">Logout</a></li>      
            <% } %>
-          <li>
+          <li class="muse-search">
           <form action="/shots" method="GET" >
             <input type="text" name="search" class="searchBox" placeholder="Search">
           </form>
           </li>
-
           </ul>
-        </div>
-      </header>
         <% include ../partials/flash-messages %>
-    </div>
-
-
-
-
   <%- body -%>
   
 
- <footer><h1>© 2019 MUSE. All rights reserved.</h1></footer>
+ <footer><h1>© 2019 MUSE.</h1></footer>
   <script src="/javascripts/shot-show.js"></script>
   <script src="/javascripts/ajax.js"></script>
   </body>

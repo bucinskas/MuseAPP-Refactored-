@@ -1,83 +1,62 @@
 
-header 
+.main-nav
   display: flex 
-  justify-content: space-between
+  justify-content: center
   align-items: center
-  background-color: #191919
-  a 
-    color: #a4a4a4
-    &:hover
-      color: #fff 
-      text-decoration: none
-  nav 
-    display: flex 
-    align-items: center 
-    
-    ul 
-      display: flex 
-      li 
-        margin: 0 15px 
-        font-weight: bold 
-  .logo 
-    margin-left: 40px 
+  background-color: #191919  
+  margin: 0
+  padding: 5px 40px
+  .muse-search 
+    margin-right: 0
+  .muse-logo 
+    margin-right: 40px 
     font-family: 'Staatliches', cursive
-    font-size: 2.5em
-    a
+    font-size: 2.4em
+    a 
       color: #fff 
       &:hover
         color: #a4a4a4
+  .muse-profile-image
+    margin-left: auto
+    margin-right: 5px
+    img 
+      border-radius: 50%    
+  .muse-signup
+    margin-left: auto
+  li 
+    margin-right: 20px  
+    font-weight: bold
+  a 
+    color: #a4a4a4
+    &:hover
+      color: #fff
+      text-decoration: none 
+  .searchBox
+    width: 230px
+    background: #fff
+    border-radius: 3px
+    padding: 5px  
+    border: 0 none 
+    font-weight: sebibold
+  .toggle-button  
+    display: none
 
-  .user-tools 
-    display: flex
-    margin-right: 40px
-    .user-info 
-      display: flex
-      align-items: center
-      li:first-child
-        margin: 0
-      li:nth-child(2)
-        margin-left: 8px
-      img 
-        border-radius: 50%
-    ul
-      display: flex
-      align-items: center 
-      li 
-        margin: 0 15px 
-        font-weight: bold 
-      
-     
 .active a
-  color: white 
+  color: white
 
-@media all and (max-width: 945px) 
-  header 
+
+@media only screen and (max-width: 900px)
+  .main-nav
     flex-direction: column
-
-
-    
-
-  header > a   
-    flex-basis: 50%
-@media all and (max-width: 920px) 
-   .user-tools > ul 
-    padding: 0  
+    display: none
+    .muse-profile-image
+      margin-left: 0
+   
+  
 
 
 
 
-
-
-
-
-
-.searchBox
-  width: 230px
-  background: #fff
-  border-radius: 3px
-  padding: 5px  
-  border: 0 none 
-  font-weight: sebibold
 
 
 
