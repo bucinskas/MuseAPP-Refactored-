@@ -17,8 +17,3 @@ if (counter2.innerHTML === " 1 ") {
 // alert(`you need to remove at least ${removalAmt} more image${removalAmt === 1? '': 's'}! `); 
 
 
-
-
-
-         
-
