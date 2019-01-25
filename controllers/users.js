@@ -10,6 +10,7 @@ cloudinary.config({
 
 module.exports = {
   async getAllArtists(req, res, next) {
+
     let users = await User.find({}); 
     res.render("users/index", {users});
   },

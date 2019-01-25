@@ -89,7 +89,7 @@ module.exports = {
   postLogin(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
       if (!user) { 
-        req.session.error = "That user does not exist"
+        req.session.error = "Incorrect username or password. Please try again."
         res.redirect('back');
         return;
       }
