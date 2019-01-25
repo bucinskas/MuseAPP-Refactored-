@@ -11,6 +11,7 @@ const logger = require('morgan');
 const session = require("express-session");
 const mongoose = require("mongoose"); 
 const methodOverride = require("method-override");
+const expressValidator = require("express-validator");
 
 
 
@@ -51,13 +52,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
+ 
 // configure express-session // has to go BEFORE PASSPORT CONFIGURATION
 app.use(session({
   secret: 'simple secret',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   
 }));
+
+
+app.use(expressValidator());
 
 app.locals.moment = require('moment');
 
@@ -88,6 +93,13 @@ app.use(function(req, res, next){
   // continue on to next function in middleware chain 
   next(); 
 }); 
+
+
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
+
 
 // mount routes 
 

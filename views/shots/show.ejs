@@ -46,7 +46,7 @@
    <% if (currentUser) { %>
       <form action="/shots/<%=shot._id%>/comments" id="comment-form" method="POST">
         <div class="field">
-          <textarea type="text" name="comment[body]" id="comment-body" placeholder="Your comment"></textarea>
+          <textarea type="text" name="comment[body]" id="comment-body" placeholder="Your comment" required></textarea>
         </div>
           <button id="btn">Comment</button>
       </form>
@@ -65,13 +65,13 @@
                   </div>
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
                   <div>
-                  <button class="toggleEditForm" id="btn">Edit</button>
                   <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
                    <textarea name="comment[body]"><%=comment.body%></textarea>
-                  <input type="submit" value="Update">
+                  <input type="submit" id="btn" value="Update">
                 </form>
+                 <input type="submit" class="toggleEditForm" id="btn" value="Edit">
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
-                 <button class="delete-comment-button" id="btn">Delete</button>
+                 <input type="submit" class="delete-comment-button" id="btn" value="Delete">
                  </form>
                   </div>   
                  <% } %>
@@ -85,7 +85,7 @@
 
         <div class="shot-likes">
         <span id="likes-main">
-        <p><i class="fas fa-heart"></i>
+        <p><i class="fas fa-heart <%=loveColorClass%>" id="loveClass"></i>
         Likes 
         <span id="loves-count" style="float:right"><%=shot.likes.length%></span></p>
         </span>
@@ -102,7 +102,7 @@
       </div>
 
       <div class="contents">
-     <% for (var i = 0; i < shots.length; i++) { %>
+     <% for (var i = 0; i <= 3; i++) { %>
     <div class="nested">
     
     <a href="/shots/<%= shots[i].id %>"><img src="<%= shots[i].image %>"></img></a>
@@ -113,8 +113,9 @@
 </div>
 
 
-<script src="/javascripts/javascripts.js"></script>
-
+<script>
+  var shot = <%- JSON.stringify(shot) %>;
+</script>
 
 
 <script>
@@ -126,13 +127,13 @@
             if(data) {
                 //add one to love, change color
                 $('#loves-count').text((parseInt($('#loves-count').text()) + 1));
-                $('#loves-count').removeClass("text-white")
-                $('#loves-count').addClass("text-dark")
+                $('#loveClass').removeClass("colorGrey")
+                $('#loveClass').addClass("colorRed")
             } else {
                 //remove one from love, change color
                 $('#loves-count').text((parseInt($('#loves-count').text()) - 1));
-                $('#loves-count').removeClass("text-dark")
-                $('#loves-count').addClass("text-white")
+                $('#loveClass').removeClass("colorRed")
+                $('#loveClass').addClass("colorGrey")
             }
         });
     });

@@ -10,10 +10,19 @@ cloudinary.config({
 
 module.exports = {
   async getShots(req, res, next) {
-      let shots = await Shot.find({}).
-      populate("author").exec(); 
-
-      res.render("shots/index", { shots });
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    let shots = await Shot.find({$or: [{title: regex}, {category: regex}, {"shot.author": regex}]}).populate("author").exec(); 
+    if(shots.length < 1) {
+      req.session.error = "Sorry, no shots match your query. Please try again";
+      return res.redirect("back");
+     }
+    res.render("shots/index", { shots });
+  } else {
+    let shots = await Shot.find({}).
+  populate("author").exec(); 
+  res.render("shots/index", { shots });
+  }
   },
   shotNew(req, res, next) {
       res.render("shots/new");
@@ -29,10 +38,11 @@ module.exports = {
     //     public_id: image.public_id
     //   });
     // }
-
+    if(!req.file) {
+			req.session.error = 'Please upload an image.';
+			return res.redirect('shots/new');
+		}
     let image = await cloudinary.v2.uploader.upload(req.file.path, {"width":400,"height":400,"crop":"fill", "gravity":"auto"}); 
-   
-   
     req.body.shot.image = image.secure_url; 
     let shot = await Shot.create(req.body.shot);
     shot.author = req.user._id; 
@@ -52,10 +62,18 @@ module.exports = {
        model: 'User'
       }
     });
+
+    let loveColorClass = "colorGrey";
+    if(req.user){
+    let isInArray = shot.likes.some(function (user) {
+    return user.equals(req.user._id);
+    });
+    if(isInArray){loveColorClass = "colorRed"}
+    }
     
     // display all shots by the user on side div 
     let shots = await Shot.find({}).where('author').equals(shot.author.id).exec();
-    res.render("shots/show", { shot, shots });
+    res.render("shots/show", { shot, shots, loveColorClass });
   },
 
   async shotEdit(req, res, next) {
@@ -103,10 +121,15 @@ module.exports = {
     // shot.save();
     // // redirect to show page  
     // res.redirect(`/shots/${shot.id}`);
-    if(req.file) {
-     await cloudinary.v2.uploader.upload(req.file.path, async (result) => { 
+    let shot = await Shot.findById(req.params.id);
+    await cloudinary.v2.uploader.destroy(shot.shotId);
+
+    if(req.file) {  
+      cloudinary.v2.uploader.upload(req.file.path, {public_id: public_id}, async (result) => { 
         req.body.shot.image = result.secure_url;
+        shot.shotId = result.public_id;
         let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);
+        req.session.success = 'Your post has been successfully updated';
         res.redirect(`/shots/${shot.id}`);
       });
   } else {
@@ -114,10 +137,7 @@ module.exports = {
       req.session.success = 'Your post has been successfully updated';
       res.redirect(`/shots/${shot.id}`);
   }
-
-
-   
-        
+    
   },
   async shotDestroy(req, res, next) {
 
@@ -131,3 +151,6 @@ module.exports = {
 
 };
 
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
