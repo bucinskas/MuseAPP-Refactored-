@@ -64,13 +64,13 @@
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
 
                   <div class="edit-and-delete">
-
-                  <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
+       
+                  <form action="/shots/<%=shot._id%>/comments/<%=comment._id%>?_method=PUT" method="POST" class="edit-comment-form">
                    <textarea name="comment[body]"><%=comment.body%></textarea>
                   <input type="submit" id="btn" value="Update">
                 </form>
-
-                 <input type="submit" class="toggleEditForm" id="btn" value="Edit">
+           <input type="submit" class="toggleEditForm" id="btn" value="Edit">
+               
 
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
                  <input type="submit" class="delete-comment-button" id="btn" value="Delete">

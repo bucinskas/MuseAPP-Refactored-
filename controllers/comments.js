@@ -27,8 +27,9 @@ module.exports = {
   },
   async commentUpdate(req, res, next) {
    let comment = await Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, {new: true});
+   let shot = await Shot.findById(req.params.id);
    let author = req.user;
-   res.status(200).json({comment: comment, author: author});
+   res.status(200).json({shot: shot, comment: comment, author: author});
   },
   async commentDestroy(req, res, next) {
     await Shot.findByIdAndUpdate(req.params.id, {
