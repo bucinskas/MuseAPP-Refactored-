@@ -22,12 +22,12 @@ module.exports = {
     // assign comment to a shot
     await shot.comments.push(comment._id);
     await shot.save();
-    // let author = req.user.local.username;
+    let author = req.user;
     res.status(200).json({shot: shot, comment: comment, author: author});
   },
   async commentUpdate(req, res, next) {
    let comment = await Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, {new: true});
-   let author = req.user.local.username;
+   let author = req.user;
    res.status(200).json({comment: comment, author: author});
   },
   async commentDestroy(req, res, next) {

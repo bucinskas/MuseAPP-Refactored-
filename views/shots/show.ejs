@@ -7,18 +7,14 @@
 <div class="showDiv">
  
     <div class="shot-header">
-    <img class="shot-header-avatar" src="<%= shot.author.avatar %>" class="profile-image" alt="user profile image">
+   <a href="/users/<%=shot.author.id%>"><img class="shot-header-avatar" src="<%= shot.author.avatar %>" class="profile-image" alt="user profile image"></a>
     <div class="shot-title"><h1><%= shot.title %></h1></div>
     <p class="shot-details">by <a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a> <span><%= moment(shot.createdAt).fromNow() %></span> in  <a href="/shots?search="><span><%=shot.category%></span></a></p>
     </div>
 
   
     <div class="shot-body">
-  
-
-
- <img src="<%=shot.image%>" alt="the image" >
- 
+ <img src="<%=shot.image%>" alt="the image">
     </div>
 
 
@@ -66,12 +62,16 @@
                    <span><%= moment(comment.createdAt).fromNow() %></span>
                   </div>
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
-                  <div>
+
+                  <div class="edit-and-delete">
+
                   <form action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=PUT" method="POST" class="edit-comment-form">
                    <textarea name="comment[body]"><%=comment.body%></textarea>
                   <input type="submit" id="btn" value="Update">
                 </form>
+
                  <input type="submit" class="toggleEditForm" id="btn" value="Edit">
+
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
                  <input type="submit" class="delete-comment-button" id="btn" value="Delete">
                  </form>
@@ -104,7 +104,7 @@
       </div>
 
       <div class="contents">
-     <% for (var i = 0; i <= 3; i++) { %>
+     <% for (var i = 0; i < shots.length; i++) { %>
     <div class="nested">
     
     <a href="/shots/<%= shots[i].id %>"><img src="<%= shots[i].image %>"></img></a>
