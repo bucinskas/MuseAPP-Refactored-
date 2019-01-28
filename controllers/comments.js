@@ -5,8 +5,9 @@ const User = require("../models/user");
 module.exports = {
   async commentCreate(req, res, next) {
     if (!req.body.comment.body) {
-      return res.status(500).json({'bodyError': 'Comment must be filled out.'});
+      req.session.error = 'Comment must be filled out.';
     }
+
     let shot = await Shot.findById(req.params.id);
    // ONLY ONE COMMENT PER POST
     // let haveCommented = shot.comments.filter(comment =>{
@@ -19,6 +20,7 @@ module.exports = {
     req.body.comment.author = req.user._id;
     //req.body.comment.body = req.sanitize(req.body.comment.body);
     let comment = await Comment.create(req.body.comment);
+    debugger
     // assign comment to a shot
     await shot.comments.push(comment._id);
     await shot.save();

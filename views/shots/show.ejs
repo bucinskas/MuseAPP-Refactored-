@@ -62,14 +62,12 @@
                    <span><%= moment(comment.createdAt).fromNow() %></span>
                   </div>
                    <% if(currentUser && comment.author.equals(currentUser.id)) { %>
-
-                  <div class="edit-and-delete">
-       
+                  <div>
                   <form action="/shots/<%=shot._id%>/comments/<%=comment._id%>?_method=PUT" method="POST" class="edit-comment-form">
                    <textarea name="comment[body]"><%=comment.body%></textarea>
                   <input type="submit" id="btn" value="Update">
                 </form>
-           <input type="submit" class="toggleEditForm" id="btn" value="Edit">
+                <input type="submit" class="toggleEditForm" id="btn" value="Edit">
                
 
                    <form class="delete-item-form" action="/shots/<%=shot.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
@@ -100,13 +98,15 @@
         <i class="fab fa-twitter"></i>
         <i class="fas fa-envelope"></i>
         </div>
-    
+          <div class="more-from"><p>More from <a href="/users/<%=shot.author.id%>"><%=shot.author.username%></a></p>  </div>
       </div>
+
+
 
       <div class="contents">
      <% for (var i = 0; i < shots.length; i++) { %>
     <div class="nested">
-    
+   
     <a href="/shots/<%= shots[i].id %>"><img src="<%= shots[i].image %>"></img></a>
     </div>
     <% }; %>

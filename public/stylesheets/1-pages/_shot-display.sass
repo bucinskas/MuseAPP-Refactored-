@@ -6,24 +6,24 @@
 .showDiv 
   display: grid
   max-width: 720px
+  padding: 0 20px
   //background: #fff
   //border-radius: 10px
   //box-shadow: 0.2px 0.2px 0.2px 0.2px rgba(25,25,25,0.2)
   grid-template-columns: repeat(2, 1fr)
   grid-column-gap: 20px
-  grid-template-rows: 80px auto auto auto 
+  grid-template-rows: 80px 1fr 1fr 1fr auto auto auto
   margin: 20px auto 
   .shot-body 
     grid-column: 1 / 2 
-    grid-row: 2 / 3
+    grid-row: 2 / 5
     img 
       width: 400px 
       height: 400px
       box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(25,25,25,0.2)
   .shot-description 
     grid-column: 1 / 2   
-    grid-row: 3 / 4 
-    margin-top: 15px 
+    grid-row: 5 / 6 
     p 
       font-size: 16px
       color: black 
@@ -69,36 +69,54 @@
     grid-auto-rows: minmax(86px, 130px) 
     justify-items: center
     grid-column: 2 / 3 
-    grid-row: 2 /  3 
-    margin-top: 100px
-    padding: 10px 20px
+    grid-row: 3 /  5 
+
     img
       width: 115px
       box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(25,25,25,0.2)
+      -webkit-filter: brightness(100%)
+      -webkit-transition: .4s ease-in-out
+      &:hover 
+        -webkit-filter: brightness(85%)
+        -webkit-transition: .4s ease-in-out
+        transition: .4s ease-in-out
   
   .shot-stats
     line-height: 3
-    margin: 0 0 20px 0
     color: #999
     grid-column: 2 / 3 
     grid-row: 2 / 3 
+    .more-from 
+      text-align: center
+      padding: 5px 0
+      font-weight: bold
+      color: #555
+      a 
+        color: black 
+ 
   
     .shot-likes
       border-bottom: 1px solid #ccc 
-    .shot-views 
-      border-bottom: 1px solid #ccc 
     .shot-share 
       border-bottom: 1px solid #ccc
+      .share-icons 
+        i 
+          margin: 0 0 0 10px 
+          &:hover 
+            color: black  
+
+  
+ 
 
 
 
 
 
 
-@media all and (max-width: 800px)
-  .contents
-    grid-column: 1 / 2
-    grid-row: 5 / 6
+@media all and (min-width: 740px)
+  .shot-stats
+    grid-column: 1 / 2 
+   
 
 
 
@@ -109,7 +127,7 @@
 .comments-section 
   border-top: 1px solid #ccc
   grid-column: 1 / 2 
-  grid-row: 4 / 5 
+  grid-row: 6 / 7 
   .content 
     margin: 20px 0 20px 0
     border-bottom: 1px solid #ccc 
@@ -152,6 +170,7 @@
     cursor: pointer
     font-weight: bold
     outline: none
+  
     
 
 

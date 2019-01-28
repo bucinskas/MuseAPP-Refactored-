@@ -122,10 +122,10 @@ module.exports = {
     // // redirect to show page  
     // res.redirect(`/shots/${shot.id}`);
     let shot = await Shot.findById(req.params.id);
-    await cloudinary.v2.uploader.destroy(shot.shotId);
+
 
     if(req.file) {  
-      cloudinary.v2.uploader.upload(req.file.path, {public_id: public_id}, async (result) => { 
+      cloudinary.v2.uploader.upload(req.file.path, async (result) => { 
         req.body.shot.image = result.secure_url;
         shot.shotId = result.public_id;
         let shot = await Shot.findByIdAndUpdate(req.params.id, req.body.shot);
@@ -140,14 +140,14 @@ module.exports = {
     
   },
   async shotDestroy(req, res, next) {
-
+    var response = confirm('Are you sure?');
     let shot = await Shot.findById(req.params.id);
     // for(const image of shot.images) {
     //   await cloudinary.v2.uploader.destroy(image.public_id);
     // }
     await shot.remove();
     res.redirect("/shots");
-  }
+    }
 
 };
 
