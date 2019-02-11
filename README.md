@@ -1,4 +1,5 @@
 # MuseAPP
 
-Built With
-
+Use demo user so test the app
+Username: Muse
+password: mymuse
